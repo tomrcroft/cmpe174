@@ -80,10 +80,10 @@
 
 function getVideos()
 {
-include 'DBconstants';
+include 'DBconstants.php';
 
 	global $display;
-	$con = mysqli_connect("localhost", "root", "password", "cs174bonushw");
+$con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 
 	$query = "
 		select *

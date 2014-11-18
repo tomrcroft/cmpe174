@@ -26,7 +26,7 @@
 10. Tag (keywords about the site separated by commas)
 **/
 
-include 'DBconstants';
+include 'DBconstants.php';
 
 $title = $_POST["title"];
 $link = $_POST["link"];
@@ -41,7 +41,7 @@ $tags = $_POST["tags"];
 
 
 
-$con = mysqli_connect("localhost", "root", "password", "cs174bonushw");
+$con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 
 if (mysqli_connect_errno()) {
 		die("Failed to connect to MySQL: " . mysqli_connect_error());}
