@@ -70,6 +70,7 @@
 				print("<td>{$output[$x][10]}</td>");
 				print("</tr>");
 			}
+		
 			?>
 		</table>
 	</body>
