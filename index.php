@@ -74,6 +74,9 @@
 			<div id='submitDiv'>
 				<input type='submit' value='Submit'>
 			</div>
+			<?php
+				print("<h1><a href='./viewVideos.php'>View Videos!</a><h1>");
+			?>
 		</form>
 	</body>
 </html>
