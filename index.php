@@ -75,7 +75,8 @@
 				<input type='submit' value='Submit'>
 			</div>
 			<?php
-				print("<h1><a href='./viewVideos.php'>View Videos!</a><h1>");
+				print("<h2><a href='./viewVideos.php'>View Videos!</a><h2>");
+				print("<h2><a href='./cleandata.php'>Clean the data</a><h2>");
 			?>
 		</form>
 	</body>

@@ -51,7 +51,7 @@
 			</tr>
 			<?php
 			$output=getVideos();
-			$sizez = sizeof($output[0]);
+			//$sizez = sizeof($output[0]);
 			//print($output[0][1]);
 			for($x = 0; $x < sizeof($output); $x++)
 			{
