@@ -1,3 +1,9 @@
+<html>
+<head>
+	<title>Here's the edit</title>
+	<link rel="stylesheet" type="text/css" href="loginPageStyle.css">
+	</head>
+	<body>
 <?php
 include 'DBconstants.php';
 $title = $_POST["title"];
@@ -31,3 +37,5 @@ else
     echo "Error updating record: " . mysqli_error($conn);
 }
 ?>
+</body>
+</html>

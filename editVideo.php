@@ -3,7 +3,7 @@
 	<head>
 		<title>Let's edit a video...</title>
 		<link rel="stylesheet" type="text/css" href="viewVideos.css">
-
+		<script src="code.jquery.com/jquery-latest.min.js"></script>
 	</head>
 	<body>
 	<?php
