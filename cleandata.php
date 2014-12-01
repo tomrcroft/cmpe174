@@ -13,18 +13,12 @@
 			$query_all = "SELECT * FROM fun_video";
 			$query_count = "DELETE FROM fun_video where id > 0 AND viewcount < 50000";
 			$query_duplicate_title = "SELECT title, count(*) AS x, id FROM fun_video GROUP BY title HAVING x > 1 ";
-			$query_domain = "DELETE FROM fun_video where title NOT LIKE '%Wing Chun%' AND title NOT LIKE '%Wing Tsun%'";
+			$query_domain = "DELETE FROM fun_video where title NOT LIKE '%Wing Chun%' AND title NOT LIKE '%Wing Tsun%' AND id > 0";
 			$query_tag = "SELECT id, tag, title from fun_video" ;// where id = 5";
-			$result = mysqli_query($conn, $query_count);
-			$resultArray = mysqli_fetch_all($result, MYSQLI_BOTH);
-			echo "<h2>All rows with count less than 50000</h2>";
-			if($resultArray)
+			//echo "<h2>All rows with count less than 50000</h2>";
+			if(mysqli_query($conn, $query_count))
 			{
-				for($x = 0; $x < sizeof($resultArray); $x++)
-				{
-					for($y = 1; $y < 11; $y++)
-						print(" {$resultArray[$x][$y]} ");
-				}
+				printf("Affected rows (DELETE): %d\n", mysqli_affected_rows($conn));
 			}
 			else
 			{
@@ -34,32 +28,51 @@
 			$resultArray = mysqli_fetch_all($result, MYSQLI_BOTH);
 			echo "<h2>Videos with duplicate titles</h2>";
 			if($resultArray)
-			{
+			{	
+				
 				for($x = 0; $x < sizeof($resultArray); $x++)
 				{	
 					echo "<b>Duplicate #", $x + 1, "</b>:";
 					print("{$resultArray[$x][0]} ");
 					print("<i>{$resultArray[$x][1]} time(s)</i><br/>");
-					if ($x != 0)
+					$title = $resultArray[$x][0];
+					$query = "SELECT * FROM fun_video where title = '$title' ORDER BY id";
+					print "$query<br>";
+					$result = mysqli_query($conn, $query);
+					if ($result)
 					{
-						$query = "DELETE from fun_video where id = {$resultArray[$x][2]}";
-						echo $query;
+						$resultA = mysqli_fetch_all($result, MYSQLI_BOTH);	
+						
+						for($y = 0; $y < sizeof($resultA); $y++)
+						{
+							print "<br><br>what have we here";
+							$query = "DELETE from fun_video where id = {$resultA[$x][0]}";
+							print "$query<br>";
+							if($y > 0)
+							{
+								
+								if(mysqli_query($conn, $query))
+								{
+									printf("Affected rows (DELETE): %d\n", mysqli_affected_rows($conn));
+								}
+							}
+						}
 					}
+					else 
+						{
+						    echo "<br>Error finding record: " . mysqli_error($conn);
+						}
 				}
 			}
 			else
 			{
 				echo("<p>Nothing to see here, move along.<p>");
 			}
-			$result = mysqli_query($conn, $query_domain);
-			$resultArray = mysqli_fetch_all($result, MYSQLI_BOTH);
+	
 			echo "<h2>Videos outside Wing Chun/Tsun Domain</h2>";
-			if($resultArray)
+			if(mysqli_query($conn, $query_domain))
 			{
-				for($x = 0; $x < sizeof($resultArray); $x++)
-				{
-					print(" {$resultArray[$x][0]} ");
-				}
+				printf("Affected rows (DELETE): %d\n", mysqli_affected_rows($conn));
 			}
 			else
 			{
@@ -112,11 +125,11 @@
 						
 						if (mysqli_query($conn, $update))
 						{
-							echo "Record updated successfully!";
+							echo "<br>Record updated successfully!";
 						}
 						else 
 						{
-						    echo "Error updating record: " . mysqli_error($conn);
+						    echo "<br>Error updating record: " . mysqli_error($conn);
 						}
 						echo "<br/>";
 					}
