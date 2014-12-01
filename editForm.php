@@ -24,7 +24,7 @@ if (mysqli_query($conn, $query))
 	echo "<h1><i>$title</i> updated successfully!</h1><br>";
 
 	echo "<h2><a href='./editVideo.php'>Edit Another Video</h2><br>";
-	echo "<h2><a href='./index.php'>Back to the index</h2>";
+	echo "<h2><a href='./homepage.php'>Back to the homepage.</h2>";
 }
 else 
 {
