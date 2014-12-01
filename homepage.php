@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+var_dump($_SESSION);
 ?>
 <html>
 <head>
@@ -29,6 +29,7 @@ session_start();
 	/**
 	This needs to be hidden is the user is not an admin.
 	*/
+	var_dump($_SESSION);
 	if(True)
 	{
 		print ("<a href='./editVideo.php'>Edit a Video!</a>");
