@@ -19,7 +19,7 @@
 			
 			<div id='lengthDiv'>
 				Enter Video Length: <br>
-				<input type="number" name="length">
+				<input type="number" name="length"> 
 			</div>
 			
 			<div id='resolutionDiv'>
@@ -74,10 +74,16 @@
 			<div id='submitDiv'>
 				<input type='submit' value='Submit'>
 			</div>
-			<?php
-				print("<h2><a href='./viewVideos.php'>View Videos!</a><h2>");
-				print("<h2><a href='./cleandata.php'>Clean the data</a><h2>");
-			?>
+			
 		</form>
+		<?php
+				print("<h2><a href='./viewVideos.php'>View Videos!</a></h2>");
+				print("<h2><a href='./cleandata.php'>Clean the data</a></h2>");
+
+				if(True)
+				{
+					print ("<h2><a href='./editVideo.php'>Edit a Video!</a></h2>");
+				}
+			?>
 	</body>
 </html>
