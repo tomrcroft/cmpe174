@@ -24,6 +24,7 @@ $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 				{
 						setcookie('usernameCookie', $username, time()+60, '/');
 						setcookie('passwordCookie', md5($pword), time()+60, '/');
+						setcookie('admin', $resultArray[2], time()+60, '/');
 				}
 				header('Location: homepage.php');
 			}

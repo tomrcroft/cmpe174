@@ -27,7 +27,9 @@
 			
 			
 		</form>
-		
+		<?php 
+		echo("<p><a href='./index.php'>Back to the index</p>");
+		?>
 		
 	
 		<table id='videos'>

@@ -22,12 +22,18 @@
 		$con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 
 
-		$sql = "INSERT INTO userInfo
-				VALUES('$username', '$pword');"; 
-
-	    $result = mysqli_query($con, $sql);
+		$sql = "INSERT INTO userInfo (username, pword, admin)
+				VALUES('$username', '$pword', 0)"; 
+		echo ($sql);
+	    if(mysqli_query($con, $sql))
+	    {
+	    	header('Location: index.php');
+	    }
+		else 
+		{
+		    echo "Error inserting record: " . mysqli_error($con);
+		}
 		
-		header('Location: index.php');
 	}
 
 		echo "<p id='redo'><a href='./registration.php'>Register again</a></p>";

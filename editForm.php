@@ -1,4 +1,5 @@
 <?php
+include 'DBconstants.php';
 $title = $_POST["title"];
 $link = $_POST["link"];
 $length = $_POST["length"];
@@ -9,22 +10,24 @@ $views = $_POST["views"];
 $type = implode(",",$_POST["type"]);
 $image = $_POST["imagelink"];
 $tags = $_POST["tags"];
+$id = $_POST["id"];
 
-$con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
+$conn = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 
 if (mysqli_connect_errno()) {
 		die("Failed to connect to MySQL: " . mysqli_connect_error());}
-$query = "UPDATE fun_video SET title=$title,"
-$result = mysqli_query($con, "insert into fun_video (title, videolink, videolength, highestresolution, description, language, viewcount, videotype, iconimage, tag)
-					VALUES('$title', '$link', $length, '$res', '$description', '$language', $views, '$type', '$image', '$tags');");
-		
-
-		
-if($result == true)
+$query = "UPDATE fun_video SET title='$title', videolink='$link', videolength='$length', highestresolution='$res', description='$description',
+	language='$language', viewcount='$views', videotype='$type', iconimage='$image', tag='$tags' WHERE id = '$id'";
+print $query;
+if (mysqli_query($conn, $query))
 {
-	print("<h1><a href='./viewVideos.php'>View Videos!</a><h1>");
-	print("<h1><a href='./index.php'>Add More Videos!</a><h1>");
+	echo "<h1><i>$title</i> updated successfully!</h1><br>";
+
+	echo "<h2><a href='./editVideo.php'>Edit Another Video</h2><br>";
+	echo "<h2><a href='./index.php'>Back to the index</h2>";
 }
 else 
-	echo $result;
+{
+    echo "Error updating record: " . mysqli_error($conn);
+}
 ?>

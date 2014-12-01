@@ -105,12 +105,13 @@ session_start();
 		</form>
 		<?php
 				print("<h2><a href='./viewVideos.php'>View Videos!</a></h2>");
-				print("<h2><a href='./cleandata.php'>Clean the data</a></h2>");
+				
 				/**
-				This needs to be hidden is the user is not an admin.
+				This needs to be hidden if the user is not an admin.
 				*/
-				if(True)
+				if(isset($_COOKIE['admin']))
 				{
+					print("<h2><a href='./cleandata.php'>Clean the data</a></h2>");
 					print ("<h2><a href='./editVideo.php'>Edit a Video!</a></h2>");
 				}
 			?>

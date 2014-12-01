@@ -29,6 +29,7 @@
 			
 			Currently Sorted by: <?= $display;?>
 			<div id="addVideoDiv">
+			<?php var_dump($_COOKIE);?>
 			<a href="./index.php">Add another Video!</a>
 			<br>
 			<a href="./homepage.php">Go back Home!</a>
