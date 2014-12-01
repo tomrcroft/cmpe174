@@ -1,36 +1,9 @@
-<?php
-session_start();
-/*
- * Created on Apr 7, 2014
- *
- *The script help login in the users into the system by taking information from the form
- *and checking it with the database. 
- *
- */
-?>
 <html>
-<head>
-<title>Log In</title>
-<link rel="stylesheet" type="text/css" href="loginPageStyle.css">
-
-</head>
-<body>
-
-
-<form name="loginForm" action="loginFile.php" method="post" >
-	<div id='usernameDiv'>
-		Username:
-		<input name="username" type="email" id="usernameInput">
-	</div>
-	<div id='passwordDiv'>
-		Password:
-		<input name="password" type="password" id="passwordInput">
-	</div>
+	<head>
+		<title>HW3</title>
+		<link rel="stylesheet" type="text/css" href="indexStyle.css">
+	</head>
 	
-<input class="b" type="submit" name="submit" value="Login" style="margin-right:10px;">
-	<a href="registration.php" ><span style ="color:blue;"> Click here to register</span></a>
-
-
 	<body>
 		<form action="inputVideo.php" method="post">
 			
@@ -46,7 +19,7 @@ session_start();
 			
 			<div id='lengthDiv'>
 				Enter Video Length: <br>
-				<input type="number" name="length"> 
+				<input type="number" name="length">
 			</div>
 			
 			<div id='resolutionDiv'>
@@ -101,25 +74,11 @@ session_start();
 			<div id='submitDiv'>
 				<input type='submit' value='Submit'>
 			</div>
-			
-		</form>
-		<?php
-				print("<h2><a href='./viewVideos.php'>View Videos!</a></h2>");
-				print("<h2><a href='./cleandata.php'>Clean the data</a></h2>");
-				/**
-				This needs to be hidden is the user is not an admin.
-				*/
-				if(True)
-				{
-					print ("<h2><a href='./editVideo.php'>Edit a Video!</a></h2>");
-				}
+			<?php
+				print("<h2><a href='./viewVideos.php'>View Videos!</a><h2>");
+				print("<h2><a href='./homepage.php'>Go Back Home!</a><h2>");
+				print("<h2><a href='./cleandata.php'>Clean the data</a><h2>");
 			?>
+		</form>
 	</body>
-
-
-</form>
-
-
-</body>
-
 </html>

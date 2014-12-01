@@ -30,6 +30,8 @@
 			Currently Sorted by: <?= $display;?>
 			<div id="addVideoDiv">
 			<a href="./index.php">Add another Video!</a>
+			<br>
+			<a href="./homepage.php">Go back Home!</a>
 			</div>
 			
 		</form>

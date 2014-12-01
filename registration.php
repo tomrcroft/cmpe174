@@ -23,7 +23,7 @@ if (isset($_POST['cancel'])) {
 
                     <div id='usernameDiv'>
 						Username:
-						<input type="text" name="myusername">
+						<input type="email" name="myusername">
 					</div>
                     
 					<div id='passwordDiv'>
