@@ -29,6 +29,9 @@ session_start();
 	
 <input class="b" type="submit" name="submit" value="Login" style="margin-right:10px;">
 	<a href="registration.php" ><span style ="color:blue;"> Click here to register</span></a>
+<br><input type="checkbox" name="cookiecheck" value="Yes" /> Remember Username and Password? <br>
+
+</form>
 
 
 	<body>
@@ -117,8 +120,7 @@ session_start();
 			?>
 	</body>
 
-
-</form>
+	
 
 
 </body>

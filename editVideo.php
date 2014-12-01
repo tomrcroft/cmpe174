@@ -2,6 +2,8 @@
 <html>
 	<head>
 		<title>Let's edit a video...</title>
+		<link rel="stylesheet" type="text/css" href="viewVideos.css">
+
 	</head>
 	<body>
 	<?php

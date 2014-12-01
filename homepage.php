@@ -25,8 +25,16 @@ session_start();
 <a href='./viewVideos.php'>View Videos!</a>
 
 <br>
-
-
+<?php
+	/**
+	This needs to be hidden is the user is not an admin.
+	*/
+	if(True)
+	{
+		print ("<a href='./editVideo.php'>Edit a Video!</a>");
+	}
+			
+?>
 <!-- <a href='./addVideo.php'>Add Video!</a> -->
 
 <br>

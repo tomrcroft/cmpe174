@@ -85,6 +85,10 @@
 				}
 				print "<br>blank<br>";
 				var_dump($_COOKIE);
+
+				print("<h2><a href='./cleandata.php'>Clean the data</a><h2>");
+				
+
 			?>
 		</form>
 	</body>
