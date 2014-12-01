@@ -18,7 +18,7 @@ if (mysqli_connect_errno()) {
 		die("Failed to connect to MySQL: " . mysqli_connect_error());}
 $query = "UPDATE fun_video SET title='$title', videolink='$link', videolength='$length', highestresolution='$res', description='$description',
 	language='$language', viewcount='$views', videotype='$type', iconimage='$image', tag='$tags' WHERE id = '$id'";
-print $query;
+//print $query;
 if (mysqli_query($conn, $query))
 {
 	echo "<h1><i>$title</i> updated successfully!</h1><br>";

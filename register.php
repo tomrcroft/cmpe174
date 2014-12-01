@@ -24,7 +24,7 @@
 
 		$sql = "INSERT INTO userInfo (username, pword, admin)
 				VALUES('$username', '$pword', 0)"; 
-		echo ($sql);
+		//echo ($sql);
 	    if(mysqli_query($con, $sql))
 	    {
 	    	header('Location: index.php');
