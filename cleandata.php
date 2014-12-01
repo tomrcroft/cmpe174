@@ -5,6 +5,7 @@
 	<body>
 		<?php
 			include("DBconstants.php");
+			print ( "<a href='./homepage.php'>Go Home</a>");
 			echo "<h1>This doesn't actually clean anything yet, this just selects what needs to be cleaned</h1><br><br>";
 			$conn = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 

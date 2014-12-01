@@ -30,7 +30,7 @@
 			
 		</form>
 		<?php 
-		echo("<p><a href='./index.php'>Back to the index</p>");
+		echo("<p><a href='./homepage.php'>Go home</a></p>");
 		?>
 		
 	
