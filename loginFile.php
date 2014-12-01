@@ -13,15 +13,15 @@ $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 	    $result = mysqli_query($con, $sql);
 		
 		if (mysqli_num_rows($result) == 0)
-				header('Location: loginPage.php');	
+				header('Location: index.php');	
 		else
 		{
 			$resultArray = mysqli_fetch_array($result, MYSQLI_NUM);
 			
 			if($resultArray[1] == $pword)
-				header('Location: index.php');
+				header('Location: homepage.php');
 			else
-				header('Location: loginPage.php');
+				header('Location: index.php');
 		}
 		
 
