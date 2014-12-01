@@ -5,5 +5,15 @@ $_session= array();
 define('TITLE', 'Logout');
 session_destroy();
 ?>
-<h2> You are now logged out.</h2>
-<h3><a href="index.php">Back to the index.</a></h3>
+
+<html>
+	<head>
+		<title>Logout</title>
+		<link rel="stylesheet" type="text/css" href="loginPageStyle.css">
+	</head>
+<body>
+	<h2> You are now logged out.</h2>
+	<h3><a href="index.php">Back to the login.</a></h3>
+</body>
+
+</html>
