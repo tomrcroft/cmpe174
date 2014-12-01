@@ -19,7 +19,14 @@ $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 			$resultArray = mysqli_fetch_array($result, MYSQLI_NUM);
 			
 			if($resultArray[1] == $pword)
+			{
+				if(isset($_POST['cookiecheck']) && $_POST['cookiecheck'] == 'Yes')
+				{
+						setcookie('usernameCookie', $username, time()+60, '/');
+						setcookie('passwordCookie', md5($pword), time()+60, '/');
+				}
 				header('Location: homepage.php');
+			}
 			else
 				header('Location: index.php');
 		}
