@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <html>
 	<head>
 		<title>View Videos</title>
@@ -29,7 +32,6 @@
 			
 			Currently Sorted by: <?= $display;?>
 			<div id="addVideoDiv">
-			<?php var_dump($_COOKIE);?>
 			<a href="./addVideo.php">Add another Video!</a>
 			<br>
 			<a href="./homepage.php">Go back Home!</a>

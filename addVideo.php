@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <html>
 	<head>
 		<title>HW3</title>
@@ -75,19 +78,18 @@
 				<input type='submit' value='Submit'>
 			</div>
 			<?php
-				print("<h2><a href='./viewVideos.php'>View Videos!</a><h2>");
-				print("<h2><a href='./homepage.php'>Go Back Home!</a><h2>");
-				if(isset($_COOKIE['admin']))
+				print("<h2><a href='./viewVideos.php'>View Videos!</a></h2>");
+				print("<h2><a href='./homepage.php'>Go Back Home!</a></h2>");	
+				if(isset($_SESSION))
+				{
+					print ("<a href='./logout.php'>Logout</a>");
+				}
+				if($_SESSION['admin'])
 				{
 					print ("<h2><a href='./editVideo.php'>Edit a Video!</a></h2>");
-					print ("<h2><a href='./cleandata.php'>Clean the data</a><h2>");
+					print ("<h2><a href='./cleandata.php'>Clean the data</a></h2>");
 				
-				}
-				print "<br>blank<br>";
-				var_dump($_COOKIE);
-
-				print("<h2><a href='./cleandata.php'>Clean the data</a><h2>");
-				
+				}				
 
 			?>
 		</form>
