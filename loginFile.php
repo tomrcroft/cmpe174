@@ -3,11 +3,12 @@
 
 	$username = $_POST['username'];
 	$pword = $_POST['password'];
-  
-$con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 
+$con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
+if (mysqli_connect_errno()) {
+				die("Failed to connect to MySQL: " . mysqli_connect_error());}
 		$sql = "SELECT *
-				FROM userInfo
+				FROM userinfo
 				WHERE username='$username';";
 
 	    $result = mysqli_query($con, $sql);

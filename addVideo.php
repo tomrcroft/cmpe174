@@ -3,7 +3,7 @@ session_start();
 ?>
 <html>
 	<head>
-		<title>HW3</title>
+		<title>Adding a video...</title>
 		<link rel="stylesheet" type="text/css" href="indexStyle.css">
 	</head>
 	

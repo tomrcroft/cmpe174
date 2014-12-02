@@ -37,7 +37,7 @@ function write($sessionId, $data) {
     $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 	global $username;
  
-    $sql = "INSERT INTO session SET session_id ='$username', session_data ='$data)' ON DUPLICATE KEY UPDATE session_data ='$data';";
+    $sql = "INSERT INTO session SET session_id ='$username', session_data ='$data' ON DUPLICATE KEY UPDATE session_data ='$data';";
     $result = mysqli_query($con, $sql);
 }
 
