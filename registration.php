@@ -19,6 +19,7 @@ if (isset($_POST['cancel'])) {
 
        
         <div class="register">
+			<h1> Register!</h1>
             <form action="register.php" method="post">
 
                     <div id='usernameDiv'>

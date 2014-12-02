@@ -18,6 +18,7 @@ session_start();
 
 
 <form name="loginForm" action="loginFile.php" method="post" >
+<h1> Login!</h1>
 	<div id='usernameDiv'>
 		Username:
 		<input name="username" type="email" id="usernameInput">

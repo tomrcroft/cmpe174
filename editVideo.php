@@ -3,7 +3,7 @@
 	<head>
 		<title>Let's edit a video...</title>
 		<link rel="stylesheet" type="text/css" href="viewVideos.css">
-		<script src="code.jquery.com/jquery-latest.min.js"></script>
+
 	</head>
 	<body>
 	<?php
@@ -49,6 +49,7 @@
 				<th>Tags</th>
 			</tr>
 			<?php
+			//include 'printtable.php';
 			$output=getVideos();
 			//$sizez = sizeof($output[0]);
 			//print($output[0][1]);
@@ -98,7 +99,8 @@
 
 </html>
 
-<?php
+<?php// include 'editVideoFunctions.php'; 
+
 function printResolution($res, $actual)
 {
 	$printp = $res . "p";
@@ -213,6 +215,7 @@ $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 	return $resultArray;
 	
 }
+
 ?>
 	</body>
 </html>

@@ -1,6 +1,3 @@
-<?php 
-session_start();
-?>
 <html>
 	<head>
 		<title>View Videos</title>
@@ -9,6 +6,7 @@ session_start();
 	
 	<body>
 	<?php
+	//session_start();
 		if(!isset($_POST["sortBy"]))
 			$display = "Title";
 		else
@@ -53,9 +51,10 @@ session_start();
 				<th>View Count</th>
 				<th>Video Type</th>
 				<th>Tags</th>
+				<th>Add To Favorite</th>
 			</tr>
 			<?php
-			$output=getVideos();
+			$output=getVideos($display);
 			//$sizez = sizeof($output[0]);
 			//print($output[0][1]);
 			for($x = 0; $x < sizeof($output); $x++)
@@ -73,6 +72,15 @@ session_start();
 				print("<td>{$output[$x][7]}</td>");
 				print("<td>{$output[$x][8]}</td>");
 				print("<td>{$output[$x][10]}</td>");
+				
+				//add favorite form
+				print("
+				<td>
+					<form action='addFavorite.php' method='post'>
+						<input type='text' style='display:none' name='linkToAdd' value='{$output[$x][2]}'>
+						<input type='submit' name='addToFav' value='Add'>
+					</form>
+				</td>");
 				print("</tr>");
 			}
 			?>
@@ -81,13 +89,14 @@ session_start();
 
 </html>
 
+
 <?php
 
-function getVideos()
+function getVideos($display)
 {
 include 'DBconstants.php';
 
-	global $display;
+	//global $display;
 $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 
 	$query = "

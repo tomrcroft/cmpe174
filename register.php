@@ -4,7 +4,6 @@
 		<link rel="stylesheet" type="text/css" href="./register_Style.css">
 	</head>
 	<body>
-
 <?php
 	include 'DBconstants.php';
 
@@ -24,14 +23,13 @@
 
 		$sql = "INSERT INTO userInfo (username, pword, admin)
 				VALUES('$username', '$pword', 0)"; 
-		//echo ($sql);
 	    if(mysqli_query($con, $sql))
 	    {
-	    	header('Location: index.php');
+	    	header('Location: ./index.php');
 	    }
 		else 
 		{
-		    echo "Error inserting record: " . mysqli_error($con);
+		    //echo "Error inserting record: " . mysqli_error($con);
 		}
 		
 	}
@@ -43,7 +41,6 @@
 		
 
 ?>
-
 </body>
 
 </html>

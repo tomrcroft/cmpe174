@@ -1,7 +1,6 @@
 <html>
 	<head>
 		<title>Cleaning the data...</title>
-			<link rel="stylesheet" type="text/css" href="loginPageStyle.css">
 	</head>
 	<body>
 		<?php
