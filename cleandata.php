@@ -177,7 +177,7 @@
 			mysqli_close($conn);
 
 			print("<h2><a href='./viewVideos.php'>View Videos!</a><h2>");
-			print("<h2><a href='./index.php'>Back to the main page</a><h2>");
+			print("<h2><a href='./homepage.php'>Back to the home page</a><h2>");
 	
 		?>
 	</body>
