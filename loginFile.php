@@ -7,7 +7,7 @@
 $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 
 		$sql = "SELECT *
-				FROM userinfo
+				FROM userInfo
 				WHERE username='$username';";
 
 	    $result = mysqli_query($con, $sql);
