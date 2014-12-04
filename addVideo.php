@@ -87,7 +87,7 @@ session_start();
 				if($_SESSION['admin'])
 				{
 					print ("<h2><a href='./editVideo.php'>Edit a Video!</a></h2>");
-					print ("<h2><a href='./cleandata.php'>Clean the data</a></h2>");
+					//print ("<h2><a href='./cleandata.php'>Clean the data</a></h2>");
 				
 				}				
 

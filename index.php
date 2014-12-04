@@ -1,13 +1,3 @@
-<?php
-session_start();
-/*
- * Created on Apr 7, 2014
- *
- *The script help login in the users into the system by taking information from the form
- *and checking it with the database. 
- *
- */
-?>
 <html>
 <head>
 <title>Log In</title>

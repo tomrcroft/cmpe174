@@ -58,9 +58,9 @@
 				
 				print("<tr>");
 				print("<form id='editForm' action='editForm.php' method='POST'>");
-				print("<td><input type='hidden' name='id' value='{$output[$x][0]}'>
-					<img src='{$output[$x][9]}' alt='video image' style='width:42px;height:42px;border:0'>
-</td>");
+				print("<td><input type='hidden' name='id' value='{$output[$x][0]}'>");
+				print("<img src='{$output[$x][9]}' alt='video image' style='width:42px;height:42px;border:0'>");
+				print("</td>");
 				print("<td><input type='text' name='link' value='{$output[$x][2]}'></td>");
 				print("<td><input type='text' name='imagelink' value='{$output[$x][9]}' ></td>");
 				print("<td><input type='text' name='title' value='{$output[$x][1]}'></td>");
@@ -93,15 +93,8 @@
 				print("</form>");
 				
 			}
-			?>
-		</table>
-	</body>
-
-</html>
-
-<?php// include 'editVideoFunctions.php'; 
-
-function printResolution($res, $actual)
+			
+			function printResolution($res, $actual)
 {
 	$printp = $res . "p";
 	if ($actual == $res)
@@ -113,6 +106,7 @@ function printResolution($res, $actual)
 		print ("<option value='$res'>$printp</option>");
 	}
 }
+
 function printType($type, $actual)
 {
 	$short = substr($type, 1);
@@ -148,7 +142,10 @@ $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 		from fun_video";
 
 	$result = mysqli_query($con, $query);
-	$resultArray = mysqli_fetch_all($result, MYSQLI_BOTH);
+	$resultArray = array();
+	while ($row = mysqli_fetch_array($result,MYSQLI_NUM)) {
+		array_push($resultArray, $row);
+	}
 	
 	$sortedBy = $display;
 	
@@ -165,57 +162,73 @@ $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 	{
 		case "Title":
 			{
-				usort($resultArray, function($a, $b) {
-					return strcmp($a[1],$b[1]);
-				});
+				usort($resultArray, "sortTitle");
 			}
 			break;
 			
 		case "Length":
 			{
-				usort($resultArray, function($a, $b) {
-					return $b[3] - $a[3];
-				});
+				usort($resultArray, "sortLength");
 			}
 			break;
 			
 		case "Resolution":
 			{
-				usort($resultArray, function($a, $b) {
-					return $b[4] - $a[4];
-				});
+				usort($resultArray, "sortResolution");
 			}
 			break;
 			
 		case "Language":
 			{
-				usort($resultArray, function($a, $b) {
-					return strcmp($a[6],$b[6]);
-				});
+				usort($resultArray, "sortLanguage");
 			}
 			break;
 			
 		case "Views":
 			{
-				usort($resultArray, function($a, $b) {
-					return $b[7] - $a[7];
-				});
+				usort($resultArray, "sortViews");
 			}
 			break;
 			
 		case "Video type":
 			{
-				usort($resultArray, function($a, $b) {
-					return strcmp($a[8],$b[8]);
-				});
+				usort($resultArray, "sortType");
 			}
 			break;
 	}
-	
 	return $resultArray;
 	
 }
 
-?>
+function sortTitle($a, $b) {
+					return strcmp($a[1],$b[1]);
+				}
+				
+function sortLength($a, $b) {
+					return $b[3] - $a[3];
+				}
+				
+function sortResolution($a, $b) {
+					return $b[4] - $a[4];
+				}
+				
+function sortLanguage($a, $b) {
+					return strcmp($a[6],$b[6]);
+				}
+				
+function sortViews($a, $b) {
+					return $b[7] - $a[7];
+				}
+				
+function sortType($a, $b) {
+					return strcmp($a[8],$b[8]);
+				}
+
+			?>
+		</table>
+	</body>
+
+</html>
+
 	</body>
 </html>

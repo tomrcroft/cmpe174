@@ -1,17 +1,20 @@
-<html>
+<?php
+ini_set("error_log", "http://www.sjsu-cs.org/classes/cs174/sec1/croft/project/php-error.log");
+	session_start();
+		if(!isset($_POST["sortBy"]))
+			$display = "Title";
+		else
+			$display = $_POST["sortBy"];
+			
+			
+	?>
+	<html>
 	<head>
 		<title>View Videos</title>
 		<link rel="stylesheet" type="text/css" href="viewVideos.css">
 	</head>
 	
 	<body>
-	<?php
-	//session_start();
-		if(!isset($_POST["sortBy"]))
-			$display = "Title";
-		else
-			$display = $_POST["sortBy"];
-	?>
 		<form id="selectForm" action="viewVideos.php" method="post">
 			<select id='sortBy' name='sortBy'>
 				<option value="Title" selected>Title</option>
@@ -37,26 +40,25 @@
 			
 		</form>
 		
+		<?php
 		
+
 	
-		<table id='videos'>
-			<tr>
-				<th>Video Image</th>
-				<th>Video Link</th>
-				<th>Video Title</th>
-				<th>Video Length</th>
-				<th>Highest Resolution</th>
-				<th>Video Description</th>
-				<th>Video Language</th>
-				<th>View Count</th>
-				<th>Video Type</th>
-				<th>Tags</th>
-				<th>Add To Favorite</th>
-			</tr>
-			<?php
-			$output=getVideos($display);
-			//$sizez = sizeof($output[0]);
-			//print($output[0][1]);
+		print("<table id='videos'>");
+			print("<tr>");
+				print("<th>Video Image</th>");
+				print("<th>Video Link</th>");
+				print("<th>Video Title</th>");
+				print("<th>Video Length</th>");
+				print("<th>Highest Resolution</th>");
+				print("<th>Video Description</th>");
+				print("<th>Video Language</th>");
+				print("<th>View Count</th>");
+				print("<th>Video Type</th>");
+				print("<th>Tags</th>");
+				print("<th>Add To Favorite</th>");
+			print("</tr>");
+			$output=getVideos();
 			for($x = 0; $x < sizeof($output); $x++)
 			{
 				print("<tr>");
@@ -83,28 +85,24 @@
 				</td>");
 				print("</tr>");
 			}
-			?>
-		</table>
-	</body>
-
-</html>
-
-
-<?php
-
-function getVideos($display)
-{
+			
+			function getVideos(){
 include 'DBconstants.php';
 
-	//global $display;
-$con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 
-	$query = "
-		select *
-		from fun_video;";
+	global $display;
+$con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
+	$query = "select * from fun_video;";
+		if ($con->connect_error) {
+    die("Connection failed: " . $con->connect_error);
+} 
+
 
 	$result = mysqli_query($con, $query);
-	$resultArray = mysqli_fetch_all($result, MYSQLI_BOTH);
+	$resultArray = array();
+	while ($row = mysqli_fetch_array($result,MYSQLI_NUM)) {
+		array_push($resultArray, $row);
+	}
 	
 	$sortedBy = $display;
 	
@@ -116,59 +114,78 @@ $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 				// <option value="Views">Views</option>
 				// <option value="Video type">Video Type</option>
 				// <option value="Tag">Tag</option>
-	
 	switch($sortedBy)
 	{
 		case "Title":
 			{
-				usort($resultArray, function($a, $b) {
-					return strcmp($a[1],$b[1]);
-				});
+				usort($resultArray, "sortTitle");
 			}
 			break;
 			
 		case "Length":
 			{
-				usort($resultArray, function($a, $b) {
-					return $b[3] - $a[3];
-				});
+				usort($resultArray, "sortLength");
 			}
 			break;
 			
 		case "Resolution":
 			{
-				usort($resultArray, function($a, $b) {
-					return $b[4] - $a[4];
-				});
+				usort($resultArray, "sortResolution");
 			}
 			break;
 			
 		case "Language":
 			{
-				usort($resultArray, function($a, $b) {
-					return strcmp($a[6],$b[6]);
-				});
+				usort($resultArray, "sortLanguage");
 			}
 			break;
 			
 		case "Views":
 			{
-				usort($resultArray, function($a, $b) {
-					return $b[7] - $a[7];
-				});
+				usort($resultArray, "sortViews");
 			}
 			break;
 			
 		case "Video type":
 			{
-				usort($resultArray, function($a, $b) {
-					return strcmp($a[8],$b[8]);
-				});
+				usort($resultArray, "sortType");
 			}
 			break;
 	}
-	
 	return $resultArray;
 	
 }
-?>
+
+function sortTitle($a, $b) {
+					return strcmp($a[1],$b[1]);
+				}
+				
+function sortLength($a, $b) {
+					return $b[3] - $a[3];
+				}
+				
+function sortResolution($a, $b) {
+					return $b[4] - $a[4];
+				}
+				
+function sortLanguage($a, $b) {
+					return strcmp($a[6],$b[6]);
+				}
+				
+function sortViews($a, $b) {
+					return $b[7] - $a[7];
+				}
+				
+function sortType($a, $b) {
+					return strcmp($a[8],$b[8]);
+				}
+	
+	
+
+			?>
+		</table>
+	</body>
+
+</html>
+
+
