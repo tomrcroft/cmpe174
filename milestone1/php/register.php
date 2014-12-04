@@ -1,7 +1,7 @@
 <html>
 	<head>
 		<title>Register Error!</title>
-		<link rel="stylesheet" type="text/css" href="./register_style.css">
+		<link rel="stylesheet" type="text/css" href="../css/register_style.css">
 	</head>
 	<body>
 	<?php

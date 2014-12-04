@@ -9,7 +9,7 @@ session_destroy();
 <html>
 	<head>
 		<title>Logout</title>
-		<link rel="stylesheet" type="text/css" href="loginPageStyle.css">
+		<link rel="stylesheet" type="text/css" href="../css/loginPageStyle.css">
 	</head>
 <body>
 	<h2> You are now logged out.</h2>

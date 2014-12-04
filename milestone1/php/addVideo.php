@@ -4,7 +4,7 @@ session_start();
 <html>
 	<head>
 		<title>HW3</title>
-		<link rel="stylesheet" type="text/css" href="indexStyle.css">
+		<link rel="stylesheet" type="text/css" href="../css/indexStyle.css">
 	</head>
 	
 	<body>

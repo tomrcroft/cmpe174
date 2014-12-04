@@ -1,7 +1,7 @@
 <html>
 <head>
 <title>add Favorite</title>
-<link rel="stylesheet" type="text/css" href="loginPageStyle.css">
+<link rel="stylesheet" type="text/css" href="../css/loginPageStyle.css">
 
 </head>
 <body>

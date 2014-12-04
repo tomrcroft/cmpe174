@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="inputVideo.css">
+		<link rel="stylesheet" type="text/css" href="../css/inputVideo.css">
 	</head>
 <body>
 <?php
