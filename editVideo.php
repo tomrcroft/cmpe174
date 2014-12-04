@@ -1,105 +1,6 @@
-
-<html>
-	<head>
-		<title>Let's edit a video...</title>
-		<link rel="stylesheet" type="text/css" href="viewVideos.css">
-
-	</head>
-	<body>
-	<?php
-		if(!isset($_POST["sortBy"]))
-			$display = "Title";
-		else
-			$display = $_POST["sortBy"];
-	?>
-		<form id="selectForm" action="editVideo.php" method="post">
-			<select id='sortBy' name='sortBy'>
-				<option value="Title" selected>Title</option>
-				<option value="Length">Length</option>
-				<option value="Resolution">Resolution</option>
-				<option value="Language">Language</option>
-				<option value="Views">Views</option>
-				<option value="Video type">Video Type</option>
-			</select>
-			
-			<input type='submit' value='Submit'>		
-			
-			
-			Currently Sorted by: <?= $display;?>
-			
-			
-		</form>
-		<?php 
-		echo("<p><a href='./homepage.php'>Go home</a></p>");
-		?>
-		
-	
-		<table id='videos'>
-			<tr>
-				<th>Video Image</th>
-				<th>Video Link</th>
-				<th>Image Link</th>
-				<th>Video Title</th>
-				<th>Video Length</th>
-				<th>Highest Resolution</th>
-				<th>Video Description</th>
-				<th>Video Language</th>
-				<th>View Count</th>
-				<th>Video Type</th>
-				<th>Tags</th>
-			</tr>
-			<?php
-			//include 'printtable.php';
-			$output=getVideos();
-			//$sizez = sizeof($output[0]);
-			//print($output[0][1]);
-			for($x = 0; $x < sizeof($output); $x++)
-			{
-				
-				print("<tr>");
-				print("<form id='editForm' action='editForm.php' method='POST'>");
-				print("<td><input type='hidden' name='id' value='{$output[$x][0]}'>
-					<img src='{$output[$x][9]}' alt='video image' style='width:42px;height:42px;border:0'>
-</td>");
-				print("<td><input type='text' name='link' value='{$output[$x][2]}'></td>");
-				print("<td><input type='text' name='imagelink' value='{$output[$x][9]}' ></td>");
-				print("<td><input type='text' name='title' value='{$output[$x][1]}'></td>");
-				print("<td><input type='number' name='length' value='{$output[$x][3]}'></td>");
-				print("<td><select name='res'>");
-				printResolution(144, $output[$x][4]);
-				printResolution(240, $output[$x][4]);
-				printResolution(360, $output[$x][4]);
-				printResolution(480, $output[$x][4]);
-				printResolution(720, $output[$x][4]);
-				printResolution(1080, $output[$x][4]);
-				print("</select></td>");
-				print("<td><textarea name='desc'>{$output[$x][5]}</textarea></td>"); 
-				print("<td><select name='lang'>");
-				printLang("English", $output[$x][6]);
-				printLang("Non-English", $output[$x][6]);
-				print("</select></td>"); 
-				print("<td><input type='number' name='views' value='{$output[$x][7]}'></td>");
-				print("<td><select multiple name='type[]'>");
-				printType("Tutorial", $output[$x][8]);
-				printType("Entertainment", $output[$x][8]);
-				printType("Application", $output[$x][8]);
-				printType("Weapon", $output[$x][8]);
-				printType("Group Demo", $output[$x][8]);
-				printType("Others", $output[$x][8]);
-				print("</select></td>");
-				print("<td><input type='text' name='tags' value='{$output[$x][10]}'></td>");
-				print("<td><input type='submit' value='Update'></td>");
-				print("</tr>");
-				print("</form>");
-				
-			}
-			?>
-		</table>
-	</body>
-
-</html>
-
-<?php// include 'editVideoFunctions.php'; 
+<?php
+    
+// include 'editVideoFunctions.php'; 
 
 function printResolution($res, $actual)
 {
@@ -110,7 +11,7 @@ function printResolution($res, $actual)
 	}
 	else
 	{
-		print ("<option value='$res'>$printp</option>");
+		print ("<option value=$res>$printp</option>");
 	}
 }
 function printType($type, $actual)
@@ -129,19 +30,20 @@ function printLang($lang, $actual)
 {
 	if($actual == $lang)
 	{
-		print ("<option value=$lang selected=\"selected\" >$lang</option>");
+		print ("<option value=$lang selected='selected' >$lang</option>");
 	}
 	else
 	{
 		print ("<option value=$lang>$lang</option>");
 	}
 }
+
 function getVideos()
 {
-include 'DBconstants.php';
+	include 'DBconstants.php';
 
 	global $display;
-$con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
+	$con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 
 	$query = "
 		select *
@@ -215,7 +117,121 @@ $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 	return $resultArray;
 	
 }
-
+//echo("<br><br>what is here<br><br>")
+//echo(getVideos());
 ?>
-	</body>
+<html>
+	<head>
+		<title>Let's edit a video...</title>
+		<link rel="stylesheet" type="text/css" href="viewVideos.css">
+
+	</head>
+	<body>
+	<?php
+		if(!isset($_POST["sortBy"]))
+			$display = "Title";
+		else
+			$display = $_POST["sortBy"];
+        
+	?>
+		<form id="selectForm" action="editVideo.php" method="post">
+			<select id='sortBy' name='sortBy'>
+				<option value="Title" selected>Title</option>
+				<option value="Length">Length</option>
+				<option value="Resolution">Resolution</option>
+				<option value="Language">Language</option>
+				<option value="Views">Views</option>
+				<option value="Video type">Video Type</option>
+			</select>
+			
+			<input type='submit' value='Submit'>		
+			
+			
+			Currently Sorted by: <?= $display;?>
+			
+			
+		</form>
+		<?php 
+		echo("<p><a href='./homepage.php'>Go home</a></p>");
+		?>
+		
+	
+		<table id='videos'>
+			<tr>
+				<th>Video Image</th>
+				<th>Video Link</th>
+				<th>Image Link</th>
+				<th>Video Title</th>
+				<th>Video Length</th>
+				<th>Highest Resolution</th>
+				<th>Video Description</th>
+				<th>Video Language</th>
+				<th>View Count</th>
+				<th>Video Type</th>
+				<th>Tags</th>
+			</tr>
+			<?php
+			//include 'printtable.php';
+			$output=getVideos();
+			//$sizez = sizeof($output[0]);
+			//print($output[0][1]);
+			for($x = 0; $x < sizeof($output); $x++)
+			{
+			    $name = "form" . $x;
+                $id = "id" . $x;
+				print("<tr id=$name>");
+				//print("<form id='editForm' action='' method='POST' name=$name>");
+				print("<td><input type='hidden' name='id'  value='{$output[$x][0]}'>
+					<img src='{$output[$x][9]}' alt='video image' style='width:42px;height:42px;border:0'>
+</td>");
+				print("<td><input type='text' name='link' value='{$output[$x][2]}'></td>");
+				print("<td><input type='text' name='imagelink' value='{$output[$x][9]}' ></td>");
+				print("<td><input type='text' name='title' value='{$output[$x][1]}'></td>");
+				print("<td><input type='number' name='length' value='{$output[$x][3]}'></td>");
+				print("<td><select name='res'>");
+				printResolution(144, $output[$x][4]);
+				printResolution(240, $output[$x][4]);
+				printResolution(360, $output[$x][4]);
+				printResolution(480, $output[$x][4]);
+				printResolution(720, $output[$x][4]);
+				printResolution(1080, $output[$x][4]);
+				print("</select></td>");
+				print("<td><textarea name='desc'>{$output[$x][5]}</textarea></td>"); 
+				print("<td><select name='lang'>");
+				printLang("English", $output[$x][6]);
+				printLang("Non-English", $output[$x][6]);
+				print("</select></td>"); 
+				print("<td><input type='number' name='views' value='{$output[$x][7]}'></td>");
+				print("<td><select multiple name='type[]'>");
+				printType("Tutorial", $output[$x][8]);
+				printType("Entertainment", $output[$x][8]);
+				printType("Application", $output[$x][8]);
+				printType("Weapon", $output[$x][8]);
+				printType("Group Demo", $output[$x][8]);
+				printType("Others", $output[$x][8]);
+				print("</select></td>");
+				print("<td><input type='text' name='tags' value='{$output[$x][10]}'></td>");
+				print("<td><input type='submit' value='Update' onclick='update($x)'></td>");
+				print("</tr>");
+				//print("</form>");
+				
+			}
+			?>
+		</table>
+	<script>
+     function update(videoID) {
+         var y = "form" + videoID;
+         var x = document.getElementById(videoID).childNodes;
+         //document.getElementById("demo").innerHTML = x;
+         var txt = "";
+    var i;
+    for (i = 0; i < x.length; i++) {
+        txt = txt + x[i].nodeName + "<br>";
+    }
+         alert(txt);
+     }
+    </script>
+    </body>
+
 </html>
+

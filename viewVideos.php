@@ -11,6 +11,7 @@
 			$display = "Title";
 		else
 			$display = $_POST["sortBy"];
+        
 	?>
 		<form id="selectForm" action="viewVideos.php" method="post">
 			<select id='sortBy' name='sortBy'>
