@@ -128,12 +128,12 @@ function getVideos()
 	</head>
 	<body>
 	<?php
-		if(!isset($_POST["sortBy"]))
-			$display = "Title";
-		else
-			$display = $_POST["sortBy"];
+        if(!isset($_POST["sortBy"]))
+            $display = "Title";
+        else
+            $display = $_POST["sortBy"];
         
-	?>
+    ?>
 		<form id="selectForm" action="editVideo.php" method="post">
 			<select id='sortBy' name='sortBy'>
 				<option value="Title" selected>Title</option>
@@ -152,8 +152,8 @@ function getVideos()
 			
 		</form>
 		<?php 
-		echo("<p><a href='./homepage.php'>Go home</a></p>");
-		?>
+            echo("<p><a href='./homepage.php'>Go home</a></p>");
+        ?>
 		
 	
 		<table id='videos'>
@@ -171,64 +171,89 @@ function getVideos()
 				<th>Tags</th>
 			</tr>
 			<?php
-			//include 'printtable.php';
-			$output=getVideos();
-			//$sizez = sizeof($output[0]);
-			//print($output[0][1]);
-			for($x = 0; $x < sizeof($output); $x++)
-			{
-			    $name = "form" . $x;
+            //include 'printtable.php';
+            $output=getVideos();
+            //$sizez = sizeof($output[0]);
+            //print($output[0][1]);
+            for($x = 0; $x < sizeof($output); $x++)
+            {
+                $name = "form" . $x;
                 $id = "id" . $x;
-				print("<tr id=$name>");
-				//print("<form id='editForm' action='' method='POST' name=$name>");
-				print("<td><input type='hidden' name='id'  value='{$output[$x][0]}'>
+                $link = "link" . $x;
+                $title = "title" . $x;
+                $length = "length" . $x;
+                $res = "res" . $x;
+                $desc = "desc" . $x;
+                $lang = "lang" . $x;
+                $views = "views" . $x;
+                $type = "type" . $x;
+                $tags = "tags" . $x;
+
+                print("<tr id=$name>");
+                //print("<form id='editForm' action='' method='POST' name=$name>");
+                print("<td><input type='hidden' name='id'  value='{$output[$x][0]}'>
 					<img src='{$output[$x][9]}' alt='video image' style='width:42px;height:42px;border:0'>
 </td>");
-				print("<td><input type='text' name='link' value='{$output[$x][2]}'></td>");
-				print("<td><input type='text' name='imagelink' value='{$output[$x][9]}' ></td>");
-				print("<td><input type='text' name='title' value='{$output[$x][1]}'></td>");
-				print("<td><input type='number' name='length' value='{$output[$x][3]}'></td>");
-				print("<td><select name='res'>");
-				printResolution(144, $output[$x][4]);
-				printResolution(240, $output[$x][4]);
-				printResolution(360, $output[$x][4]);
-				printResolution(480, $output[$x][4]);
-				printResolution(720, $output[$x][4]);
-				printResolution(1080, $output[$x][4]);
-				print("</select></td>");
-				print("<td><textarea name='desc'>{$output[$x][5]}</textarea></td>"); 
-				print("<td><select name='lang'>");
-				printLang("English", $output[$x][6]);
-				printLang("Non-English", $output[$x][6]);
-				print("</select></td>"); 
-				print("<td><input type='number' name='views' value='{$output[$x][7]}'></td>");
-				print("<td><select multiple name='type[]'>");
-				printType("Tutorial", $output[$x][8]);
-				printType("Entertainment", $output[$x][8]);
-				printType("Application", $output[$x][8]);
-				printType("Weapon", $output[$x][8]);
-				printType("Group Demo", $output[$x][8]);
-				printType("Others", $output[$x][8]);
-				print("</select></td>");
-				print("<td><input type='text' name='tags' value='{$output[$x][10]}'></td>");
-				print("<td><input type='submit' value='Update' onclick='update($x)'></td>");
-				print("</tr>");
-				//print("</form>");
-				
+                print("<td><input type='text' id=$link name='link' value='{$output[$x][2]}'></td>");
+                print("<td><input type='text' id=$imagelink name='imagelink' value='{$output[$x][9]}' ></td>");
+                print("<td><input type='text' id=$title name='title' value='{$output[$x][1]}'></td>");
+                print("<td><input type='number' id=$length name='length' value='{$output[$x][3]}'></td>");
+                print("<td><select id = $res name='res'>");
+                printResolution(144, $output[$x][4]);
+                printResolution(240, $output[$x][4]);
+                printResolution(360, $output[$x][4]);
+                printResolution(480, $output[$x][4]);
+                printResolution(720, $output[$x][4]);
+                printResolution(1080, $output[$x][4]);
+                print("</select></td>");
+                print("<td><textarea id=$desc name='desc'>{$output[$x][5]}</textarea></td>"); 
+                print("<td><select id=$lang name='lang'>");
+                printLang("English", $output[$x][6]);
+                printLang("Non-English", $output[$x][6]);
+                print("</select></td>"); 
+                print("<td><input type='number' id=$views name='views' value='{$output[$x][7]}'></td>");
+                print("<td><select multiple name='type[]' id=$type>");
+                printType("Tutorial", $output[$x][8]);
+                printType("Entertainment", $output[$x][8]);
+                printType("Application", $output[$x][8]);
+                printType("Weapon", $output[$x][8]);
+                printType("Group Demo", $output[$x][8]);
+                printType("Others", $output[$x][8]);
+                print("</select></td>");
+                print("<td><input type='text' id=$tags name='tags' value='{$output[$x][10]}'></td>");
+                print("<td><input type='submit' value='Update' onclick='update($x)'></td>");
+                print("</tr>");
+                //print("</form>");
 			}
 			?>
 		</table>
 	<script>
-     function update(videoID) {
-         var y = "form" + videoID;
-         var x = document.getElementById(videoID).childNodes;
-         //document.getElementById("demo").innerHTML = x;
-         var txt = "";
-    var i;
-    for (i = 0; i < x.length; i++) {
-        txt = txt + x[i].nodeName + "<br>";
-    }
-         alert(txt);
+     function update(id) {
+         //alert(id);
+         alert(document.getElementById("id" + res));
+         var vid = document.getElementById("id" + id).value();
+         var link = document.getElementById("link" + id).value();
+         var title = document.getElementById("title" + id).value();
+         var length = document.getElementById("length" + id).value();
+         var res = document.getElementById("res" + id).value();
+         var desc = document.getElementById("desc" + id).value();
+         var lang = document.getElementById("lang" + id).value();
+         var views = document.getElementById("views" + id).value;
+         var type = document.getElementById("type" + id).value();
+         var tags = document.getElementById("tags" + id).value();
+         //alert("id" + id);
+         //alert(res);
+         /*$.ajax({
+         type: "POST",
+         url: "editForm.php",
+         data: {},
+         success: function () {
+         alert("Video updated!");
+         },
+         failure: function () {
+         alert("Video not updated..");
+         }
+         })*/
      }
     </script>
     </body>
