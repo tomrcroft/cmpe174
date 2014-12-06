@@ -1,7 +1,4 @@
 <?php
-    
-// include 'editVideoFunctions.php'; 
-
 function printResolution($res, $actual)
 {
 	$printp = $res . "p";
@@ -117,14 +114,13 @@ function getVideos()
 	return $resultArray;
 	
 }
-//echo("<br><br>what is here<br><br>")
-//echo(getVideos());
+
 ?>
 <html>
 	<head>
 		<title>Let's edit a video...</title>
 		<link rel="stylesheet" type="text/css" href="viewVideos.css">
-
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	</head>
 	<body>
 	<?php
@@ -132,9 +128,9 @@ function getVideos()
             $display = "Title";
         else
             $display = $_POST["sortBy"];
-        
+        		
     ?>
-		<form id="selectForm" action="editVideo.php" method="post">
+
 			<select id='sortBy' name='sortBy'>
 				<option value="Title" selected>Title</option>
 				<option value="Length">Length</option>
@@ -148,13 +144,13 @@ function getVideos()
 			
 			
 			Currently Sorted by: <?= $display;?>
-			
+
 			
 		</form>
 		<?php 
             echo("<p><a href='./homepage.php'>Go home</a></p>");
         ?>
-		
+		<p id="demo"></p>
 	
 		<table id='videos'>
 			<tr>
@@ -182,6 +178,7 @@ function getVideos()
                 $link = "link" . $x;
                 $title = "title" . $x;
                 $length = "length" . $x;
+                $imagelink = "imagelink" . $x;
                 $res = "res" . $x;
                 $desc = "desc" . $x;
                 $lang = "lang" . $x;
@@ -191,7 +188,7 @@ function getVideos()
 
                 print("<tr id=$name>");
                 //print("<form id='editForm' action='' method='POST' name=$name>");
-                print("<td><input type='hidden' name='id'  value='{$output[$x][0]}'>
+                print("<td><input type='hidden' name=$id  value='{$output[$x][0]}'>
 					<img src='{$output[$x][9]}' alt='video image' style='width:42px;height:42px;border:0'>
 </td>");
                 print("<td><input type='text' id=$link name='link' value='{$output[$x][2]}'></td>");
@@ -221,40 +218,15 @@ function getVideos()
                 printType("Others", $output[$x][8]);
                 print("</select></td>");
                 print("<td><input type='text' id=$tags name='tags' value='{$output[$x][10]}'></td>");
-                print("<td><input type='submit' value='Update' onclick='update($x)'></td>");
+                print("<td><button onclick='update($x)'>Update</button></td>");
                 print("</tr>");
                 //print("</form>");
+       
 			}
 			?>
 		</table>
 	<script>
-     function update(id) {
-         //alert(id);
-         alert(document.getElementById("id" + res));
-         var vid = document.getElementById("id" + id).value();
-         var link = document.getElementById("link" + id).value();
-         var title = document.getElementById("title" + id).value();
-         var length = document.getElementById("length" + id).value();
-         var res = document.getElementById("res" + id).value();
-         var desc = document.getElementById("desc" + id).value();
-         var lang = document.getElementById("lang" + id).value();
-         var views = document.getElementById("views" + id).value;
-         var type = document.getElementById("type" + id).value();
-         var tags = document.getElementById("tags" + id).value();
-         //alert("id" + id);
-         //alert(res);
-         /*$.ajax({
-         type: "POST",
-         url: "editForm.php",
-         data: {},
-         success: function () {
-         alert("Video updated!");
-         },
-         failure: function () {
-         alert("Video not updated..");
-         }
-         })*/
-     }
+     
     </script>
     </body>
 
