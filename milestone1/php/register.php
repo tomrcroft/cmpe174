@@ -1,10 +1,10 @@
 <html>
 	<head>
 		<title>Register Error!</title>
-		<link rel="stylesheet" type="text/css" href="./register_Style.css">
+		<link rel="stylesheet" type="text/css" href="../css/register_style.css">
 	</head>
 	<body>
-<?php
+	<?php
 	include 'DBconstants.php';
 
 	$username = $_POST['myusername'];
@@ -24,22 +24,19 @@
 		$sql = "INSERT INTO userInfo (username, pword, admin)
 				VALUES('$username', '$pword', 0)"; 
 	    if(mysqli_query($con, $sql))
-	    {
-	    	header('Location: ./index.php');
+	    {	error_reporting(E_ALL);
+		ini_set('display_errors', TRUE);
+		echo "<p id='redo'><a href='./index.php'>Login!</a></p>";
+		exit();
 	    }
 		else 
 		{
-		    //echo "Error inserting record: " . mysqli_error($con);
+		    echo "Error inserting record: " . mysqli_error($con);
 		}
 		
 	}
 
 		echo "<p id='redo'><a href='./registration.php'>Register again</a></p>";
-
-  
-
-		
-
 ?>
 </body>
 

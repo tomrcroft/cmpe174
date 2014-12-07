@@ -4,7 +4,7 @@ session_start();
 <html>
 <head>
 <title>Homepage</title>
-<link rel="stylesheet" type="text/css" href="viewVideos.css">
+<link rel="stylesheet" type="text/css" href="../css/viewVideos.css">
 
 </head>
 <body>
@@ -32,7 +32,7 @@ session_start();
 	{
 		print ("<h3>Admin Functions:</h3>");
 		print ("<a href='./editVideo.php'>Edit a Video!</a>");
-		print ("<br><a href='./cleandata.php'>Clean the data</a>");
+		//print ("<br><a href='./cleandata.php'>Clean the data</a>");
 	}
 	if($_SESSION)
 	{
@@ -53,7 +53,10 @@ session_start();
 	{
 		$con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 		$result = mysqli_query($con,"select * from fun_video WHERE videolink='$value'");
-		$resultArray = mysqli_fetch_all($result, MYSQLI_BOTH);
+		$resultArray = array();
+	while ($row = mysqli_fetch_array($result,MYSQLI_NUM)) {
+		array_push($resultArray, $row);
+	}
 		array_push($output, $resultArray[0]);
 	}
 

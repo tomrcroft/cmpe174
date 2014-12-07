@@ -1,7 +1,7 @@
 <html>
 <head>
 <title>Homepage</title>
-<link rel="stylesheet" type="text/css" href="viewVideos.css">
+<link rel="stylesheet" type="text/css" href="../css/viewVideos.css">
 
 </head>
 <body>
@@ -12,7 +12,7 @@ $title = $_POST["title"];
 $link = $_POST["link"];
 $length = $_POST["length"];
 $res = $_POST["res"];
-$description = htmlentities($_POST["desc"], ENT_QUOTES, 'UTF-8', TRUE);
+$description = $_POST["desc"];
 $language = $_POST["lang"];
 $views = $_POST["views"];
 $type = implode(",",$_POST["type"]);

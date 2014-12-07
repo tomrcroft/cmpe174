@@ -3,8 +3,10 @@ session_start();
 ?>
 <html>
 	<head>
+
 		<title>Adding a video...</title>
 		<link rel="stylesheet" type="text/css" href="indexStyle.css">
+
 	</head>
 	
 	<body>
@@ -87,7 +89,7 @@ session_start();
 				if($_SESSION['admin'])
 				{
 					print ("<h2><a href='./editVideo.php'>Edit a Video!</a></h2>");
-					print ("<h2><a href='./cleandata.php'>Clean the data</a></h2>");
+					//print ("<h2><a href='./cleandata.php'>Clean the data</a></h2>");
 				
 				}				
 

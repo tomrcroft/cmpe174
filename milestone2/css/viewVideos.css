@@ -1,0 +1,33 @@
+#selectForm {
+	text-align: center;
+}
+
+#addVideoDiv{
+	margin: 20px;
+}
+
+table, td, th {
+    border: 1px solid red;
+}
+
+th {
+    background-color: black;
+    color: red;
+}
+
+td{
+	background-color: white;
+}
+
+body {
+	background-color: grey;
+	text-align: center;
+}
+
+a {
+	text-align: center;
+	}
+	
+	h1 {
+	text-align: center;
+	}
