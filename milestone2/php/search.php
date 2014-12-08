@@ -38,9 +38,10 @@ else
 			
 		</form>
         		            <?php
+                          $search = $_POST['search'];
                 echo("Search by tag: ");
                 echo("<form id='search' action='search.php' method='POST'>");
-                echo("<input type='text' name='search'><input type='submit' value='Search'>");
+                echo("<input type='text' name='search' value='$search'><input type='submit' value='Search'>");
                 echo("</form>");
 
             ?>
