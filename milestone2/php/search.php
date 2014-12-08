@@ -1,21 +1,22 @@
 <?php
-ini_set("error_log", "http://www.sjsu-cs.org/classes/cs174/sec1/croft/project/php-error.log");
-	session_start();
-		if(!isset($_POST["sortBy"]))
-			$display = "Title";
-		else
-			$display = $_POST["sortBy"];
-			
-			
-	?>
-	<html>
-	<head>
-		<title>View Videos</title>
-		<link rel="stylesheet" type="text/css" href="viewVideos.css">
-	</head>
-	
-	<body>
-		<form id="selectForm" action="viewVideos.php" method="post">
+session_start();
+if(!isset($_POST["sortBy"]))
+	$display = "Title";
+else
+	$display = $_POST["sortBy"];
+$search = $_POST['search'];
+#echo($search);
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        		<title>Searching..</title>
+		<link rel="stylesheet" type="text/css" href="viewVideos.css"> 
+    </head>
+    <body>
+        		<form id="selectForm" action="viewVideos.php" method="post">
 			<select id='sortBy' name='sortBy'>
 				<option value="Title" selected>Title</option>
 				<option value="Length">Length</option>
@@ -26,11 +27,7 @@ ini_set("error_log", "http://www.sjsu-cs.org/classes/cs174/sec1/croft/project/ph
 			</select>
 			
 			<input type='submit' value='Submit'>
-			
-						<br>
-			
-			
-			
+                    			
 			Currently Sorted by: <?= $display;?>
 			<div id="addVideoDiv">
 			<a href="./addVideo.php">Add another Video!</a>
@@ -40,14 +37,15 @@ ini_set("error_log", "http://www.sjsu-cs.org/classes/cs174/sec1/croft/project/ph
 			</div>
 			
 		</form>
-		            <?php
+        		            <?php
                 echo("Search by tag: ");
                 echo("<form id='search' action='search.php' method='POST'>");
                 echo("<input type='text' name='search'><input type='submit' value='Search'>");
                 echo("</form>");
 
             ?>
-		<?php
+
+        <?php
 		
 
 	
@@ -66,7 +64,7 @@ ini_set("error_log", "http://www.sjsu-cs.org/classes/cs174/sec1/croft/project/ph
 				print("<th>Add To Favorite</th>");
 			print("</tr>");
 			$output=getVideos();
-			for($x = 0; $x < sizeof($output); $x++)
+            for($x = 0; $x < sizeof($output); $x++)
 			{
 				print("<tr>");
 				print("<td><a target='_blank' href='{$output[$x][2]}'>
@@ -92,28 +90,29 @@ ini_set("error_log", "http://www.sjsu-cs.org/classes/cs174/sec1/croft/project/ph
 				</td>");
 				print("</tr>");
 			}
-			
-			function getVideos(){
-include 'DBconstants.php';
+            function getVideos(){
+                include 'DBconstants.php';
 
 
-	global $display;
-$con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
-	$query = "select * from fun_video;";
-		if ($con->connect_error) {
-    die("Connection failed: " . $con->connect_error);
-} 
+	            global $display;
+                $search = $_POST['search'];
+                $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
+	            $query = "select * from fun_video where tag like '%$search%';";
+                #echo($query);
+	            if ($con->connect_error) {
+                    die("Connection failed: " . $con->connect_error);
+                } 
 
 
-	$result = mysqli_query($con, $query);
-	$resultArray = array();
-	while ($row = mysqli_fetch_array($result,MYSQLI_NUM)) {
-		array_push($resultArray, $row);
-	}
+	            $result = mysqli_query($con, $query);
+	            $resultArray = array();
+	            while ($row = mysqli_fetch_array($result,MYSQLI_NUM)) {
+		            array_push($resultArray, $row);
+	            }
 	
-	$sortedBy = $display;
+	            $sortedBy = $display;
 	
-	// <option value="Title" selected>Title</option>
+	            // <option value="Title" selected>Title</option>
 				// <option value="Length">Length</option>
 				// <option value="Resolution">Resolution</option>
 				// <option value="Description">Description</option>
@@ -121,45 +120,45 @@ $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 				// <option value="Views">Views</option>
 				// <option value="Video type">Video Type</option>
 				// <option value="Tag">Tag</option>
-	switch($sortedBy)
-	{
-		case "Title":
-			{
-				usort($resultArray, "sortTitle");
-			}
-			break;
+	            switch($sortedBy)
+	            {
+		            case "Title":
+			            {
+				            usort($resultArray, "sortTitle");
+			            }
+			            break;
 			
-		case "Length":
-			{
-				usort($resultArray, "sortLength");
-			}
-			break;
+		            case "Length":
+			            {
+				            usort($resultArray, "sortLength");
+			            }
+			            break;
 			
-		case "Resolution":
-			{
-				usort($resultArray, "sortResolution");
-			}
-			break;
+		            case "Resolution":
+			            {
+				            usort($resultArray, "sortResolution");
+			            }
+			            break;
 			
-		case "Language":
-			{
-				usort($resultArray, "sortLanguage");
-			}
-			break;
+		            case "Language":
+			            {
+				            usort($resultArray, "sortLanguage");
+			            }
+			            break;
 			
-		case "Views":
-			{
-				usort($resultArray, "sortViews");
-			}
-			break;
+		            case "Views":
+			            {
+				            usort($resultArray, "sortViews");
+			            }
+			            break;
 			
-		case "Video type":
-			{
-				usort($resultArray, "sortType");
-			}
-			break;
-	}
-	return $resultArray;
+		            case "Video type":
+			            {
+				            usort($resultArray, "sortType");
+			            }
+			            break;
+	            }
+	            return $resultArray;
 	
 }
 
@@ -190,9 +189,5 @@ function sortType($a, $b) {
 	
 
 			?>
-		</table>
-	</body>
-
+    </body>
 </html>
-
-

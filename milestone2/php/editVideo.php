@@ -30,6 +30,8 @@
 			
 		</form>
 		<?php 
+            echo("Search by tag: ");
+            echo("<input type='text' name='search'><br>");
 		echo("<p><a href='./homepage.php'>Go home</a></p>");
 		?>
 		

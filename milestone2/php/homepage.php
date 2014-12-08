@@ -9,11 +9,9 @@ session_start();
 </head>
 <body>
 
-<p>
 
 <h1> Welcome to the Homepage! </h1>
 
-</p>
 
 <p>
 
