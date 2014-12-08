@@ -1,5 +1,5 @@
 <?php
-	include 'DBconstantsR.php';
+	include 'DBconstants.php';
 
 	$username = $_POST['username'];
 	$pword = $_POST['password'];

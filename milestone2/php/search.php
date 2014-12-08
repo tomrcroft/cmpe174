@@ -4,7 +4,7 @@ if(!isset($_POST["sortBy"]))
 	$display = "Title";
 else
 	$display = $_POST["sortBy"];
-$search = $_POST['search'];
+#$search = $_POST['search'];
 #echo($search);
 ?>
 
@@ -95,7 +95,8 @@ $search = $_POST['search'];
 
 
 	            global $display;
-                $search = $_POST['search'];
+                $search = htmlentities($_POST['search']);
+               
                 $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 	            $query = "select * from fun_video where tag like '%$search%';";
                 #echo($query);
