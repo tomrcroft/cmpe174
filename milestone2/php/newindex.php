@@ -48,6 +48,14 @@
            
         ?>
 </div>
+    			<?php
+
+                echo("<form id='search' action='search.php' method='POST'>");
+                echo("<input type='submit' value='Search'><input type='text' name='search'>");
+                echo("</form>");
+
+            ?>
+    <br><br>
     <form id="selectForm" action="viewVideos.php" method="post">
 			<select id='sortBy' name='sortBy'>
 				<option value="Title" selected>Title</option>
@@ -62,24 +70,16 @@
 			
 						<br>
 			
-			
+
 			
 			Currently Sorted by: <?= $display;?>
 			<div id="addVideoDiv">
-			<a href="./addVideo.php">Add another Video!</a>
+			<a href="./addVideo.php">Add a Video!</a>
 			<br>
-
-			<a href="./homepage.php">Go back Home!</a>
 			</div>
 			
 		</form>
-		            <?php
-                echo("Search by tag: ");
-                echo("<form id='search' action='search.php' method='POST'>");
-                echo("<input type='text' name='search'><input type='submit' value='Search'>");
-                echo("</form>");
 
-            ?>
 		<?php
 		
 
