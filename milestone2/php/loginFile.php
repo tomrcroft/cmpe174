@@ -30,7 +30,7 @@ $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 						setcookie('passwordCookie', md5($pword), time()+60, '/');
 						setcookie('admin', $resultArray[2], time()+60, '/');
 						ob_end_clean();
-						header('Location: homepage.php');
+						header('Location: newindex.php');
 						exit();
 				}
 				session_start();
@@ -38,11 +38,11 @@ $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 				$_SESSION['password'] = md5($pword);
 				$_SESSION['admin'] = $resultArray[2];
 				ob_end_clean();
-				header('Location: homepage.php');
+				header('Location: newindex.php');
 				exit();
 			}
 			else
-				header('Location: index.php');
+				header('Location: newindex.php');
 		}
 		
 

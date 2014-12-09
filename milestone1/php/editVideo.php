@@ -132,7 +132,7 @@ function printLang($lang, $actual)
 }
 function getVideos()
 {
-include 'DBconstants.php';
+include 'DBconstantsR.php';
 
 	global $display;
 $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
