@@ -5,6 +5,9 @@
 			$display = "Title";
 		else
 			$display = $_POST["sortBy"];
+			
+		if(isset($_GET["sortby"]))
+			$display = $_GET["sortby"];
 	
 	$pagenum = 0;
 			
@@ -29,7 +32,10 @@
 			else
 				$pagenum += 10;
 		}
-		$realpagenum = round($pagenum / 10) + 1;
+		if($pagenum == 0)
+			$realpagenum = 1;
+		else
+			$realpagenum = round($pagenum / 10) + 1;
 	//echo "after $pagenum";
 		
 			
@@ -83,7 +89,7 @@
 
             ?>
     <br><br>
-    <form id="selectForm" action="viewVideos.php" method="post">
+    <form id="selectForm" action="newIndex.php" method="post">
 			<select id='sortBy' name='sortBy'>
 				<option value="Title" selected>Title</option>
 				<option value="Length">Length</option>
@@ -163,6 +169,7 @@
 			print("<div id='paginationDiv'>");
 				echo("<form id='pagination' action='newindex.php' method='GET'>");
 				echo "<input type='text' style='display:none' name='pagenum' value='$pagenum'>";
+				echo "<input type='text' style='display:none' name='sortby' value='$display'>";
                 echo("<input type='submit' name='prev' value='Previous'>");
 				echo("$realpagenum");
 				echo("<input type='submit' name='next' value='Next'>");
