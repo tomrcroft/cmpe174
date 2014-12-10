@@ -11,3 +11,8 @@ div {
    top:0;
    right:0;
   }
+
+#paginationDiv
+{
+	text-align: center;
+}

@@ -5,6 +5,33 @@
 			$display = "Title";
 		else
 			$display = $_POST["sortBy"];
+	
+	$pagenum = 0;
+			
+	if(isset($_GET['pagenum']))
+		$pagenum = $_GET['pagenum'];
+			echo "before $pagenum";
+
+	if(isset($_GET['prev']))
+		{
+			if($pagenum == 0 || $pagenum == 9)
+				$pagenum = 0;
+			else 
+				$pagenum = $pagenum - 10;
+		}
+	
+	if(isset($_GET['next']))
+		{
+			if($pagenum == 0)
+				$pagenum = $pagenum + 9;
+			else if($pagenum == 49)
+				$pagenum = $pagenum;
+			else
+				$pagenum += 10;
+		}
+		$realpagenum = round($pagenum / 10) + 1;
+	echo "after $pagenum";
+		
 			
 			
 	?>
@@ -99,7 +126,12 @@
 				print("<th>Add To Favorite</th>");
 			print("</tr>");
 			$output=getVideos();
-			for($x = 0; $x < sizeof($output); $x++)
+			if((sizeof($output) - $pagenum) < 10)
+				$pagenumindex = sizeof($output);
+			else 
+				$pagenumindex = $pagenum + 10;
+
+			for($x = $pagenum; $x < $pagenumindex; $x++)
 			{
 				print("<tr>");
 				print("<td><a target='_blank' href='{$output[$x][2]}'>
@@ -124,10 +156,21 @@
 					</form>
 				</td>");
 				print("</tr>");
+				
+				
 			}
 			
+			print("<div id='paginationDiv'>");
+				echo("<form id='pagination' action='newindex.php' method='GET'>");
+				echo "<input type='text' style='display:none' name='pagenum' value='$pagenum'>";
+                echo("<input type='submit' name='prev' value='Previous'>");
+				echo("$realpagenum");
+				echo("<input type='submit' name='next' value='Next'>");
+                echo("</form>");
+				print("</div>");
+			
 			function getVideos(){
-include 'DBconstants.php';
+include 'DBconstantsR.php';
 
 
 	global $display;
