@@ -7,7 +7,7 @@
 <body>
 
 <?php
-include 'DBconstants.php';
+include 'DBconstantsR.php';
 $title = $_POST["title"];
 $link = $_POST["link"];
 $length = $_POST["length"];
@@ -32,7 +32,7 @@ if (mysqli_query($conn, $query))
 	echo "<h1><i>$title</i> updated successfully!</h1><br>";
 
 	echo "<h2><a href='./editVideo.php'>Edit Another Video</h2><br>";
-	echo "<h2><a href='./homepage.php'>Back to Home!</h2>";
+	echo "<h2><a href='./newindex.php'>Back to Home!</h2>";
 }
 else 
 {

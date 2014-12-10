@@ -111,6 +111,16 @@
 			<br>
 			</div>
 			
+			<?php
+			if($_SESSION['admin'])
+			{
+				echo "<div id='editVideoDiv'>";
+				echo "<a href='./editVideo.php'>Edit a Video!</a>";
+				echo "<br>";
+				echo "</div>";
+			}
+			?>
+			
 		</form>
 
 		<?php

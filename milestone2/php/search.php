@@ -92,7 +92,7 @@ else
 				print("</tr>");
 			}
             function getVideos(){
-                include 'DBconstants.php';
+                include 'DBconstantsR.php';
 
 
 	            global $display;
