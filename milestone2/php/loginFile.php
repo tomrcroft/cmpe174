@@ -1,5 +1,5 @@
 <?php
-	include 'DBconstants.php';
+	include 'DBconstantsR.php';
 
 	$username = $_POST['username'];
 	$pword = $_POST['password'];
@@ -13,7 +13,7 @@ $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 	    $result = mysqli_query($con, $sql);
 		
 		if (mysqli_num_rows($result) == 0)
-				header('Location: index.php');	
+				header('Location: newindex.php');	
 		else
 		{
 			$resultArray = mysqli_fetch_array($result, MYSQLI_NUM);

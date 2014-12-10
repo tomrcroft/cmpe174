@@ -10,7 +10,7 @@
 			
 	if(isset($_GET['pagenum']))
 		$pagenum = $_GET['pagenum'];
-			echo "before $pagenum";
+			//echo "before $pagenum";
 
 	if(isset($_GET['prev']))
 		{
@@ -30,7 +30,7 @@
 				$pagenum += 10;
 		}
 		$realpagenum = round($pagenum / 10) + 1;
-	echo "after $pagenum";
+	//echo "after $pagenum";
 		
 			
 			
