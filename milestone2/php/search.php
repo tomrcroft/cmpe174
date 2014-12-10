@@ -1,22 +1,102 @@
 <?php
-session_start();
-if(!isset($_POST["sortBy"]))
-	$display = "Title";
-else
-	$display = $_POST["sortBy"];
-#$search = $_POST['search'];
-#echo($search);
-?>
+//ini_set("error_log", "http://www.sjsu-cs.org/classes/cs174/sec1/croft/project/php-error.log");
+	session_start();
+		if(!isset($_POST["sortBy"]))
+			$display = "Title";
+		else
+			$display = $_POST["sortBy"];
+			
+		if(isset($_GET["sortby"]))
+			$display = $_GET["sortby"];
+			
+		if(isset($_POST['search']))
+			$search = htmlentities($_POST['search']);
+		else
+			$search = htmlentities($_GET['search']);
+			
+	$output=getVideos();
+	
+	$pagenum = 0;
+			
+	if(isset($_GET['pagenum']))
+		$pagenum = $_GET['pagenum'];
+			//echo "before $pagenum";
 
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        		<title>Searching..</title>
-		<link rel="stylesheet" type="text/css" href="viewVideos.css"> 
-    </head>
-    <body>
-        		<form id="selectForm" action="viewVideos.php" method="post">
+	if(isset($_GET['prev']))
+		{
+			if($pagenum == 0 || $pagenum == 9)
+				$pagenum = 0;
+			else 
+				$pagenum = $pagenum - 10;
+		}
+	
+	if(isset($_GET['next']))
+		{
+			if($pagenum == 0 && !((sizeof($output) - $pagenum) < 10))
+				$pagenum = $pagenum + 9;
+			else if((sizeof($output) - $pagenum) < 10)
+				$pagenum = $pagenum;
+			else
+				$pagenum += 10;
+		}
+		if($pagenum == 0)
+			$realpagenum = 1;
+		else
+			$realpagenum = round($pagenum / 10) + 1;
+	//echo "after $pagenum";
+		
+			
+			
+	?>
+<html>
+<head>
+<title>Wing Chun Videos</title>
+<link rel="stylesheet" type="text/css" href="../css/index.css">
+
+</head>
+<body>
+
+
+     <?php
+        if(!isset($_SESSION['username']))
+        {
+            echo "<div class='topcorner'>
+            <form name='loginForm' action='loginFile.php' method='post' >
+            <p>Login here!<br></p>
+		    Username:
+		    <input name='username' type='email' id='usernameInput'>
+            <br>
+		    Password:
+		    <input name='password' type='password' id='passwordInput'>
+            <br>
+            <input class='b' type='submit' name='submit' value='Login'>
+            <br>
+	        <a href='registration.php' ><span style ='color:blue;'> Click here to register</span></a>
+            <br><input type='checkbox' name='cookiecheck' value='Yes' /> Remember Username and Password? <br
+            </form><br><br>";
+        }
+        else
+        {
+            $username = $_SESSION["username"];
+            echo "<div class='topcorner'>";
+            echo ("<br>Hello, $username!<br>");
+            echo "<a href='homepage.php'> <span stile ='color:blue;'>Go to Homepage</span></a><br>";
+            echo "<a href='./logout.php'>Logout</a>";
+            echo "</div>";
+        }
+
+           
+        ?>
+</div>
+    			<?php
+
+                echo("<form id='search' action='search.php' method='POST'>");
+                echo("<input type='submit' value='Search'><input type='text' name='search'>");
+                echo("</form>");
+
+            ?>
+    <br><br>
+    <form id="selectForm" action="newIndex.php" method="post">
 			<select id='sortBy' name='sortBy'>
 				<option value="Title" selected>Title</option>
 				<option value="Length">Length</option>
@@ -27,29 +107,33 @@ else
 			</select>
 			
 			<input type='submit' value='Submit'>
-                    			
+			
+						<br>
+			
+
+			
 			Currently Sorted by: <?= $display;?>
 			<div id="addVideoDiv">
-			<a href="./addVideo.php">Add another Video!</a>
+			<a href="./addVideo.php">Add a Video!</a>
 			<br>
-
-			<a href="./homepage.php">Go back Home!</a>
 			</div>
 			
+			<?php
+			if($_SESSION['admin'])
+			{
+				echo "<div id='editVideoDiv'>";
+				echo "<a href='./editVideo.php'>Edit a Video!</a>";
+				echo "<br>";
+				echo "</div>";
+			}
+			?>
+			
 		</form>
-        		            <?php
-                          $search = $_POST['search'];
-                echo("Search by tag: ");
-                echo("<form id='search' action='search.php' method='POST'>");
-                echo("<input type='text' name='search' value='$search'><input type='submit' value='Search'>");
-                echo("</form>");
 
-            ?>
-
-        <?php
+		<?php
 		
 
-	
+	    print("<br><br>");
 		print("<table id='videos'>");
 			print("<tr>");
 				print("<th>Video Image</th>");
@@ -64,8 +148,13 @@ else
 				print("<th>Tags</th>");
 				print("<th>Add To Favorite</th>");
 			print("</tr>");
-			$output=getVideos();
-            for($x = 0; $x < sizeof($output); $x++)
+			//$output=getVideos();
+			if((sizeof($output) - $pagenum) < 10)
+				$pagenumindex = sizeof($output);
+			else 
+				$pagenumindex = $pagenum + 10;
+
+			for($x = $pagenum; $x < $pagenumindex; $x++)
 			{
 				print("<tr>");
 				print("<td><a target='_blank' href='{$output[$x][2]}'>
@@ -90,13 +179,27 @@ else
 					</form>
 				</td>");
 				print("</tr>");
+				
+				
 			}
-            function getVideos(){
+			
+			print("<div id='paginationDiv'>");
+				echo("<form id='pagination' action='search.php' method='GET'>");
+				echo "<input type='text' style='display:none' name='search' value='$search'>";
+				echo "<input type='text' style='display:none' name='pagenum' value='$pagenum'>";
+				echo "<input type='text' style='display:none' name='sortby' value='$display'>";
+                echo("<input type='submit' name='prev' value='Previous'>");
+				echo("$realpagenum");
+				echo("<input type='submit' name='next' value='Next'>");
+                echo("</form>");
+				print("</div>");
+			
+			function getVideos(){
                 include 'DBconstantsR.php';
 
 
 	            global $display;
-                $search = htmlentities($_POST['search']);
+                global $search;
                
                 $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 	            $query = "select * from fun_video where tag like '%$search%';";
@@ -191,5 +294,6 @@ function sortType($a, $b) {
 	
 
 			?>
-    </body>
+		</table>
+</body>
 </html>
