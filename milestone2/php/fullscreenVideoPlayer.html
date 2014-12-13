@@ -1,57 +1,134 @@
  <HEAD>
-  	<style>
-  		.slideshow-overlay {
-  			position: absolute;
-  			width: 100%;
-  			/* height: 390px; */
-  			margin: 0 0 0 -50%;
-  			left: 50%;
-  			top: 40%;
-  			color: #ffffff;
-  			text-align: center;
-  			font-size: 40px;
-  			font-family: "Arial", sans-serif;
-  		}
-  	</style>
+ 	<style>
+ 		.slideshow-overlay {
+ 			position: absolute;
+ 			width: 100%;
+ 			/* height: 390px; */
+ 			margin: 0 0 0 -50%;
+ 			left: 50%;
+ 			top: 40%;
+ 			color: #ffffff;
+ 			text-align: center;
+ 			font-size: 40px;
+ 			font-family: "Arial", sans-serif;
+ 		}
+ 	</style>
 
-  	<script LANGUAGE="JavaScript">
-		var timeDelay = 10; 
-		var videos = new Array
-		(
-			"https://www.youtube.com/embed/uVkjj8568d8?controls=0&amp;showinfo=1&amp;autoplay=1&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org" 
-			,"https://www.youtube.com/embed/NkJ6x1tIlY4?controls=0&amp;showinfo=1&amp;autoplay=1&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org"
-			,"https://www.youtube.com/embed/dTGeH5Fr8p0?controls=0&amp;showinfo=1&amp;autoplay=1&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org"
-			,"https://www.youtube.com/embed/5AKFNCIJdvA?controls=0&amp;showinfo=1&amp;autoplay=1&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org"	
-			,"https://www.youtube.com/embed/YWQKA18ADLs?controls=0&amp;showinfo=1&amp;autoplay=1&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org"
-			,"https://www.youtube.com/embed/6LhRIk_yCQU?controls=0&amp;showinfo=1&amp;autoplay=1&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org"
-		);
+ 	<script LANGUAGE="JavaScript">
+ 		var timeDelay = 10;
+ 		var videoOptions =  "?controls=0&amp;showinfo=1&amp;autoplay=1&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org"
+ 		var randomVideos = [];
+ 		var videos = 
+ 		[
+ 			"https://www.youtube.com/embed/uVkjj8568d8" 
+ 			,"https://www.youtube.com/embed/NkJ6x1tIlY4"
+ 			,"https://www.youtube.com/embed/dTGeH5Fr8p0"
+ 			,"https://www.youtube.com/embed/5AKFNCIJdvA"	
+ 			,"https://www.youtube.com/embed/YWQKA18ADLs"
+ 			,"https://www.youtube.com/embed/6LhRIk_yCQU"
+ 			,"https://www.youtube.com/embed/hBxqptNa6"
+ 			,"https://www.youtube.com/embed/Iq4IdP1YiL8"
+ 			,"https://www.youtube.com/embed/Gd2A8L87v2I"
+ 			,"https://www.youtube.com/embed/g4fKTwi1F_o"
+ 			,"https://www.youtube.com/embed/HEH3kzYCEDs"
+ 			,"https://www.youtube.com/embed/upwyWKzozII"
+ 			,"https://www.youtube.com/embed/QH13kYFzfFk"
+ 			,"https://www.youtube.com/embed/DhETnNWajrA"
+ 		];
 
-		var howMany = videos.length;
-		timeDelay *= 1000;
-		var PicCurrentNum = 0;
-		var PicCurrent = new Image();
-		PicCurrent.src = videos[PicCurrentNum];
-		function startVideos() {
-			setInterval("slideshow()", timeDelay);
-		}
-		function slideshow() {
-			PicCurrentNum++;
-			if (PicCurrentNum == howMany) {
-				PicCurrentNum = 0;
-			}
-			PicCurrent.src = videos[PicCurrentNum];
-			document.getElementById("ytplayer").src = PicCurrent.src;
-			document.getElementById('ytplayer').mute();
+ 		var arrayLength = videos.length;
+ 		timeDelay *= 1000;
+ 		var PicCurrentNum = 0;
+ 		var PicCurrent = new Image();
+ 		PicCurrent.src = videos[PicCurrentNum];
+
+ 		function getNextRandomVideo() {
+ 			var idx = Math.floor(Math.random() * 100);
+ 			idx = idx % arrayLength;
+ 			return idx; 
+ 		}
+
+ 		function getUniqueNextRandomVideo() {
+ 			var isContinue = true;
+ 			var idx;
+ 			while (isContinue) {
+ 				isContinue = false;
+ 				idx = getNextRandomVideo();
+ 				for (var i = 0; i < randomVideos.length; i++) {
+ 					if (randomVideos[i] == idx) {
+ 						isContinue = true;
+ 						break; //in use already
+ 					}
+ 				}
+
+ 			}
+ 			randomVideos[randomVideos.length] = idx;
+ 			return idx;
+ 		}
+
+ 		function randomVideoIndexes(requiredVideos) {
+ 			var arr = []
+ 			while(arr.length < requiredVideos){
+ 				var randomnumber=getNextRandomVideo();
+ 				var found=false;
+ 				for(var i=0;i<arr.length;i++){
+ 					if(arr[i]==randomnumber){found=true;break}
+ 				}
+ 				if(!found)arr[arr.length]=randomnumber;
+ 			}
+ 			return arr;
+ 		}
+
+ 		function startVideos() {
+ 			var randomIndexes = randomVideoIndexes(4);
+ 			document.getElementById("ytplayer1").src = videos[randomIndexes[0]];
+ 			document.getElementById("ytplayer2").src = videos[randomIndexes[1]];
+ 			document.getElementById("ytplayer3").src = videos[randomIndexes[2]];
+ 			document.getElementById("ytplayer4").src = videos[randomIndexes[3]];
+
+ 			setInterval("slideshow()", timeDelay);
+
+ 		}
+ 		function slideshow() {
+ 			PicCurrentNum++;
+ 			if (PicCurrentNum == arrayLength) {
+ 				PicCurrentNum = 0;
+ 			}
+ 			PicCurrent.src = videos[PicCurrentNum];
+ 			var srcString = PicCurrent.src + videoOptions
+ 			document.getElementById("ytplayer").src = srcString;
+
+			//document.getElementById('ytplayer').mute();
 		}
 
 	</script>
 </HEAD>
 
 <BODY OnLoad="startVideos()">
-	<iframe id="ytplayer" width="100%" height="1080" volume: silent
+	<iframe id="ytplayer" width="100%" height="75%" volume: silent
 	src="https://www.youtube.com/embed/uVkjj8568d8?controls=0&amp;showinfo=1&amp;autoplay=1&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org">
-	</iframe>
+</iframe>
 
-	<div class="slideshow-overlay">
-		<h1>Wing Chun</h1>
-	</div>
+<div class="slideshow-overlay">
+	<h1>Wing Chun</h1>
+</div>
+
+<div align="center">
+	<iframe id="ytplayer1" width="20%" height="25%" volume: silent
+	src="https://www.youtube.com/embed/uVkjj8568d8?controls=0&amp;showinfo=1&amp;autoplay=0&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org">
+</iframe>
+
+<iframe id="ytplayer2" width="20%" height="25%" volume: silent
+src="https://www.youtube.com/embed/uVkjj8568d8?controls=0&amp;showinfo=1&amp;autoplay=0&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org">
+</iframe>
+
+<iframe id="ytplayer3" width="20%" height="25%" volume: silent
+src="https://www.youtube.com/embed/uVkjj8568d8?controls=0&amp;showinfo=1&amp;autoplay=0&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org">
+</iframe>
+
+<iframe id="ytplayer4" width="20%" height="25%" volume: silent
+src="https://www.youtube.com/embed/uVkjj8568d8?controls=0&amp;showinfo=1&amp;autoplay=0&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org">
+</iframe>
+
+</div>
+</BODY>
