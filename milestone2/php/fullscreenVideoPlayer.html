@@ -1,56 +1,57 @@
+ <HEAD>
+  	<style>
+  		.slideshow-overlay {
+  			position: absolute;
+  			width: 100%;
+  			/* height: 390px; */
+  			margin: 0 0 0 -50%;
+  			left: 50%;
+  			top: 40%;
+  			color: #ffffff;
+  			text-align: center;
+  			font-size: 40px;
+  			font-family: "Arial", sans-serif;
+  		}
+  	</style>
 
-<!DOCTYPE html>
-<html>
-<head>
-	<style>
-		.slideshow-overlay {
-			position: absolute;
-			width: 100%;
-			/* height: 390px; */
-			margin: 0 0 0 -50%;
-			left: 50%;
-			top: 100px;
-			color: #ffffff;
-			text-align: center;
-			font-size: 40px;
-			font-family: "Arial", sans-serif;
+  	<script LANGUAGE="JavaScript">
+		var timeDelay = 10; 
+		var videos = new Array
+		(
+			"https://www.youtube.com/embed/uVkjj8568d8?controls=0&amp;showinfo=1&amp;autoplay=1&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org" 
+			,"https://www.youtube.com/embed/NkJ6x1tIlY4?controls=0&amp;showinfo=1&amp;autoplay=1&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org"
+			,"https://www.youtube.com/embed/dTGeH5Fr8p0?controls=0&amp;showinfo=1&amp;autoplay=1&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org"
+			,"https://www.youtube.com/embed/5AKFNCIJdvA?controls=0&amp;showinfo=1&amp;autoplay=1&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org"	
+			,"https://www.youtube.com/embed/YWQKA18ADLs?controls=0&amp;showinfo=1&amp;autoplay=1&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org"
+			,"https://www.youtube.com/embed/6LhRIk_yCQU?controls=0&amp;showinfo=1&amp;autoplay=1&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org"
+		);
+
+		var howMany = videos.length;
+		timeDelay *= 1000;
+		var PicCurrentNum = 0;
+		var PicCurrent = new Image();
+		PicCurrent.src = videos[PicCurrentNum];
+		function startVideos() {
+			setInterval("slideshow()", timeDelay);
 		}
-	</style>
-	<script type="text/javascript" language="javascript">
-		function screenWidth(){
-			return screen.width;
+		function slideshow() {
+			PicCurrentNum++;
+			if (PicCurrentNum == howMany) {
+				PicCurrentNum = 0;
+			}
+			PicCurrent.src = videos[PicCurrentNum];
+			document.getElementById("ytplayer").src = PicCurrent.src;
+			document.getElementById('ytplayer').mute();
 		}
 
-		function screenHeight(){
-			return screen.height;
-		}
 	</script>
+</HEAD>
 
+<BODY OnLoad="startVideos()">
+	<iframe id="ytplayer" width="100%" height="1080" volume: silent
+	src="https://www.youtube.com/embed/uVkjj8568d8?controls=0&amp;showinfo=1&amp;autoplay=1&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org">
+	</iframe>
 
-	<body>
-
-	<!--
-	<video autoplay="autoplay" muted="muted" poster="https://www.paypalobjects.com/webstatic/en_US/mktg/wright/home/	HolidayF1_frame1600.jpg" width= "screenWidth()" + "px" height= 1080 + "px"
-		<source src="https://www.paypalobjects.com/webstatic/en_US/mktg/wright/videos/HolidayF1_C.mp4" type="video/mp4">
-			<source src="https://www.paypalobjects.com/webstatic/en_US/mktg/wright/videos/HolidayF1_C.webm" type="video/webm">
-			</video>
-
-
-			second
-
-					<iframe id="ytplayer" type="text/html" width="1920" height="1080"
-		src="http://www.youtube.com/embed/M7lc1UVf-VE?autoplay=1&origin=http://example.com"
-		frameborder="0"/>
-		-->
-
-		
-
-
-<iframe id="ytplayer" frameborder="0" allowfullscreen="1" title="YouTube video player" width=1920 height=1080 src="https://www.youtube.com/embed/UTucZltO4UM?controls=0&amp;showinfo=1&amp;autoplay=1&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org"></iframe>
-
-		<div class="slideshow-overlay">
-        <h1>Martial Arts</h1>
-        </div>
-	</body>
-</head>
-</html> 
+	<div class="slideshow-overlay">
+		<h1>Wing Chun</h1>
+	</div>
