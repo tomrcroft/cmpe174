@@ -187,7 +187,7 @@
 				print("</div>");
 			
 			function getVideos(){
-include 'DBconstantsR.php';
+include 'DBconstants.php';
 
 
 	global $display;
