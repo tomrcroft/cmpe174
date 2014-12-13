@@ -12,9 +12,9 @@
 			if (mysqli_connect_errno()) {
 				die("Failed to connect to MySQL: " . mysqli_connect_error());}
 			$query_all = "SELECT * FROM fun_video";
-			$query_count = "DELETE FROM fun_video where id > 0 AND viewcount < 50000";
+			$query_count = "SELECT FROM fun_video where id > 0 AND viewcount < 50000";
 			$query_duplicate_title = "SELECT title, count(*) AS x, id FROM fun_video GROUP BY title HAVING x > 1 ";
-			$query_domain = "DELETE FROM fun_video where title NOT LIKE '%Wing Chun%' AND title NOT LIKE '%Wing Tsun%' AND id > 0";
+			$query_domain = "SELECT * FROM fun_video where title NOT LIKE '%Wing Chun%' AND title NOT LIKE '%Wing Tsun%' AND id > 0";
 			$query_tag = "SELECT id, tag, title from fun_video" ;// where id = 5";
 			//echo "<h2>All rows with count less than 50000</h2>";
 			if(mysqli_query($conn, $query_count))
@@ -44,7 +44,7 @@
 					{
 						$resultA = mysqli_fetch_all($result, MYSQLI_BOTH);	
 						
-						for($y = 0; $y < sizeof($resultA); $y++)
+						/*for($y = 0; $y < sizeof($resultA); $y++)
 						{
 							print "<br><br>what have we here";
 							$query = "DELETE from fun_video where id = {$resultA[$x][0]}";
@@ -57,7 +57,7 @@
 									printf("Affected rows (DELETE): %d\n", mysqli_affected_rows($conn));
 								}
 							}
-						}
+						}*/
 					}
 					else 
 						{
