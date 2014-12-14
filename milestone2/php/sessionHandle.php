@@ -1,5 +1,5 @@
 <?php
-include 'DBconstantsR.php';
+include 'DBconstants.php';
   
 $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 
