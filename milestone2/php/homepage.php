@@ -21,6 +21,10 @@ session_start();
 
 <a href='./viewVideos.php'>View Videos!</a>
 
+<br><br>
+
+<a href='./editProfile.php'>Edit Profile</a>
+
 <?php
 	/**
 	This needs to be hidden is the user is not an admin.
