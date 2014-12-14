@@ -106,10 +106,7 @@
 
 			
 			Currently Sorted by: <?= $display;?>
-			<div id="addVideoDiv">
-			<a href="./addVideo.php">Add a Video!</a>
-			<br>
-			</div>
+
 			
 			<?php
 			if($_SESSION['admin'])
