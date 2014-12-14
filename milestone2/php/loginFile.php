@@ -1,5 +1,5 @@
 <?php
-	include 'DBconstantsR.php';
+	include 'DBconstants.php';
 
 	$username = $_POST['username'];
 	$pword = $_POST['password'];
@@ -13,7 +13,7 @@ $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 	    $result = mysqli_query($con, $sql);
 		
 		if (mysqli_num_rows($result) == 0)
-				header('Location: newindex.php');	
+				header('Location: index.php');	
 		else
 		{
 			$resultArray = mysqli_fetch_array($result, MYSQLI_NUM);
@@ -30,7 +30,7 @@ $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 						setcookie('passwordCookie', md5($pword), time()+60, '/');
 						setcookie('admin', $resultArray[2], time()+60, '/');
 						ob_end_clean();
-						header('Location: newindex.php');
+						header('Location: index.php');
 						exit();
 				}
 				session_start();
@@ -38,11 +38,11 @@ $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 				$_SESSION['password'] = md5($pword);
 				$_SESSION['admin'] = $resultArray[2];
 				ob_end_clean();
-				header('Location: newindex.php');
+				header('Location: homepage.php');
 				exit();
 			}
 			else
-				header('Location: newindex.php');
+				header('Location: index.php');
 		}
 		
 
