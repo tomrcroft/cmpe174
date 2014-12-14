@@ -49,6 +49,10 @@
 </head>
 <body>
 
+		<div id='start'>
+		<h1>Start Up Page!</h1>
+		</div>
+
 
      <?php
         if(!isset($_SESSION['username']))
@@ -73,9 +77,14 @@
             $username = $_SESSION["username"];
             echo "<div class='topcorner'>";
             echo ("<br>Hello, $username!<br>");
-            echo "<a href='homepage.php'> <span stile ='color:blue;'>Go to Homepage</span></a><br>";
-            echo "<a href='./logout.php'>Logout</a>";
-            echo "</div>";
+			echo "<ul>";
+			echo "<li><a href='./homepage.php'>Home</a></li>";
+			echo "<li><a href='./index.php'>Start Up</a></li>";
+			echo "<li><a href='./addVideo.php'>Add Video</a></li>";
+			echo "<li><a href='./viewVideos.php'>View Videos</a></li>";
+			echo "<li><a href='./editProfile.php'>Edit Profile</a></li>";
+			echo "<li><a href='./logout.php'>Logout</a></li>";
+			echo "</ul>";
         }
 
            
@@ -109,12 +118,15 @@
 
 			
 			<?php
-			if($_SESSION['admin'])
+			if(isset($_SESSION['admin']))
 			{
-				echo "<div id='editVideoDiv'>";
-				echo "<a href='./editVideo.php'>Edit a Video!</a>";
-				echo "<br>";
-				echo "</div>";
+				if($_SESSION['admin'])
+				{
+					echo "<div id='editVideoDiv'>";
+					echo "<a href='./editVideo.php'>Edit a Video!</a>";
+					echo "<br>";
+					echo "</div>";
+				}
 			}
 			?>
 			

@@ -9,12 +9,14 @@ session_start();
 	
 	<body>
 		<ul>
-			<li><a href='./homepage.php'>Home</a></li>
-			<li><a href='./addVideo.php'>Add Video</a></li>
-			<li><a href='./viewVideos.php'>View Videos</a></li>
-			<li><a href='./editProfile.php'>Edit Profile</a></li>
-			<li><a href='./logout.php'>Logout</a></li>
-		</ul>
+	<li><a href='./homepage.php'>Home</a></li>
+				<li><a href='./index.php'>Start Up</a></li>
+
+	<li><a href='./addVideo.php'>Add Video</a></li>
+	<li><a href='./viewVideos.php'>View Videos</a></li>
+	<li><a href='./editProfile.php'>Edit Profile</a></li>
+	<li><a href='./logout.php'>Logout</a></li>
+</ul>
 	
 		<form action="inputVideo.php" method="post">
 			
