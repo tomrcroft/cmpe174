@@ -13,7 +13,7 @@ if (isset($_POST['cancel'])) {
     <head>
         <title>Registration</title>
 
-        <link rel="stylesheet" type="text/css" href="loginPageStyle.css">
+        <link rel="stylesheet" type="text/css" href="../css/loginPageStyle.css">
     </head>
     <body>
 
