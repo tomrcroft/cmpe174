@@ -89,7 +89,7 @@
 
             ?>
     <br><br>
-    <form id="selectForm" action="newIndex.php" method="post">
+    <form id="selectForm" action="index.php" method="post">
 			<select id='sortBy' name='sortBy'>
 				<option value="Title" selected>Title</option>
 				<option value="Length">Length</option>
@@ -177,7 +177,7 @@
 			}
 			
 			print("<div id='paginationDiv'>");
-				echo("<form id='pagination' action='newindex.php' method='GET'>");
+				echo("<form id='pagination' action='index.php' method='GET'>");
 				echo "<input type='text' style='display:none' name='pagenum' value='$pagenum'>";
 				echo "<input type='text' style='display:none' name='sortby' value='$display'>";
                 echo("<input type='submit' name='prev' value='Previous'>");
