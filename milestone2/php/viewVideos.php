@@ -11,7 +11,7 @@ ini_set("error_log", "http://www.sjsu-cs.org/classes/cs174/sec1/croft/project/ph
 	<html>
 	<head>
 		<title>View Videos</title>
-		<link rel="stylesheet" type="text/css" href="viewVideos.css">
+		<link rel="stylesheet" type="text/css" href="../css/viewVideos.css">
 	</head>
 	
 	<body>
