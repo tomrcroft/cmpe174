@@ -9,21 +9,21 @@ session_start();
 </head>
 <body>
 
+<ul>
+	<li><a href='./homepage.php'>Home</a></li>
+	<li><a href='./addVideo.php'>Add Video</a></li>
+	<li><a href='./viewVideos.php'>View Videos</a></li>
+	<li><a href='./editProfile.php'>Edit Profile</a></li>
+	<li><a href='./logout.php'>Logout</a></li>
+</ul>
+
 
 <h1> Welcome to the Homepage! </h1>
 
 
 <p>
 
-<a href='./addVideo.php'>Add Video!</a>
 
-<br>
-
-<a href='./viewVideos.php'>View Videos!</a>
-
-<br><br>
-
-<a href='./editProfile.php'>Edit Profile</a>
 
 <?php
 	/**
@@ -36,14 +36,14 @@ session_start();
 		print ("<a href='./editVideo.php'>Edit a Video!</a>");
 		//print ("<br><a href='./cleandata.php'>Clean the data</a>");
 	}
-	if($_SESSION)
-	{
-		print ("<br><br><br><a href='./logout.php'>Logout</a>");
-	}	
+	// if($_SESSION)
+	// {
+		// print ("<ul><li><a href='./logout.php'>Logout</a></li></ul>");
+	// }	
 	
 	//populate favorites
 	
-	print("<p> <h1> Your List Of Favorites </h1> </p>");
+	print("<p> <h1> Your List of Favorites </h1> </p>");
 	
 	session_write_close();
 	
