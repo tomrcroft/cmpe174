@@ -23,7 +23,7 @@ session_start();
 <h1> Welcome to the Homepage! </h1>
 
 
-<p>
+
 
 
 
@@ -34,16 +34,10 @@ session_start();
 	
 	if($_SESSION['admin'])
 	{
-		print ("<h3>Admin Functions:</h3>");
-		print ("<a href='./editVideo.php'>Edit a Video!</a>");
+		print ("<p  id='mya'><h3>Admin Functions:</h3>");
+		print ("<h3><a href='./editVideo.php'>Edit a Video!</a></h3></p>");
 		//print ("<br><a href='./cleandata.php'>Clean the data</a>");
 	}
-	// if($_SESSION)
-	// {
-		// print ("<ul><li><a href='./logout.php'>Logout</a></li></ul>");
-	// }	
-	
-	//populate favorites
 	
 	print("<p> <h1> Your List of Favorites </h1> </p>");
 	
@@ -54,9 +48,9 @@ session_start();
 	
 	
 	foreach($_SESSION as $value)
-	{
+	{//echo "value is: " .$value;
 		$con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
-		$result = mysqli_query($con,"select * from fun_video WHERE videolink='$value'");
+		$result = mysqli_query($con,"select * from fun_video_all WHERE videolink='$value'");
 		$resultArray = array();
 	while ($row = mysqli_fetch_array($result,MYSQLI_NUM)) {
 		array_push($resultArray, $row);
@@ -78,6 +72,7 @@ session_start();
 					<th>View Count</th>
 					<th>Video Type</th>
 					<th>Tags</th>
+					<th>Delete From Favorites</th>
 				</tr>");
 		
 		for($x = 0; $x < sizeof($output); $x++)
@@ -95,7 +90,13 @@ session_start();
 					print("<td>{$output[$x][7]}</td>");
 					print("<td>{$output[$x][8]}</td>");
 					print("<td>{$output[$x][10]}</td>");
-					
+				
+					print("<td>
+							<form id='delete' action='deleteFavorite.php' method='POST'>
+								<input type='text' style='display:none' name='linkToDelete' value='{$output[$x][2]}'>
+								<input type='submit' name='addToFav' value='Delete'>
+							</form>
+						   </td>");
 				
 					print("</tr>");
 				}
@@ -108,7 +109,7 @@ session_start();
 
 <br>
 
-</p>
+
 
 
 </body>

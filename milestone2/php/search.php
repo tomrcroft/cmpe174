@@ -56,6 +56,16 @@
 </head>
 <body>
 
+<ul>
+	<li><a href='./homepage.php'>Home</a></li>
+				<li><a href='./index.php'>Start Up</a></li>
+
+	<li><a href='./addVideo.php'>Add Video</a></li>
+	<li><a href='./viewVideos.php'>View Videos</a></li>
+	<li><a href='./editProfile.php'>Edit Profile</a></li>
+	<li><a href='./logout.php'>Logout</a></li>
+</ul>
+
 
      <?php
         if(!isset($_SESSION['username']))
@@ -202,7 +212,7 @@
                 global $search;
                
                 $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
-	            $query = "select * from fun_video where tag like '%$search%';";
+	            $query = "select * from fun_video_all where tag like '%$search%';";
                 #echo($query);
 	            if ($con->connect_error) {
                     die("Connection failed: " . $con->connect_error);

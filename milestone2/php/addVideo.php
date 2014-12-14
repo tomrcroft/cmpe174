@@ -4,7 +4,7 @@ session_start();
 <html>
 	<head>
 		<title>HW3</title>
-		<link rel="stylesheet" type="text/css" href="../css/indexStyle.css">
+		<link rel="stylesheet" type="text/css" href="../css/index.css">
 	</head>
 	
 	<body>
@@ -18,7 +18,7 @@ session_start();
 	<li><a href='./logout.php'>Logout</a></li>
 </ul>
 	
-		<form action="inputVideo.php" method="post">
+		<form id='editVid' action="inputVideo.php" method="post">
 			
 			<div id='titleDiv'>
 				Enter Video Title: <br>

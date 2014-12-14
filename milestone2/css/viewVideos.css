@@ -21,10 +21,10 @@ td{
 
 body {
 	background-color: grey;
-	text-align: center;
+
 }
 
-a {
+#mya {
 	text-align: center;
 	}
 	
@@ -32,6 +32,7 @@ a {
 	text-align: center;
 	}
 	
-li {
-    display: inline;
-}
+	h3 {
+	text-align: center;
+	}
+

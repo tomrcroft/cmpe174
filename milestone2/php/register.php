@@ -5,6 +5,7 @@
 	</head>
 	<body>
 	<?php
+	ini_set("error_log", "http://sjsu-cs.org/classes/cs174/sec1/croft/milestone2/");
 	include 'DBconstants.php';
 
 	$username = $_POST['myusername'];
@@ -23,9 +24,9 @@
 
 		$sql = "INSERT INTO userInfo (username, pword, admin)
 				VALUES('$username', '$pword', 0)"; 
-	    if(mysqli_query($con, $sql))
-	    {	error_reporting(E_ALL);
-		ini_set('display_errors', TRUE);
+		$result = mysqli_query($con, $sql);
+	    if($result)
+	    {	
 		echo "<p id='redo'><a href='./index.php'>Login!</a></p>";
 		exit();
 	    }

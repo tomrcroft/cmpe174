@@ -240,7 +240,7 @@ include 'DBconstantsR.php';
 
 	global $display;
 $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
-	$query = "select * from fun_video;";
+	$query = "select * from fun_video_all;";
 		if ($con->connect_error) {
     die("Connection failed: " . $con->connect_error);
 } 

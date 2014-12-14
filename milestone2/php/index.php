@@ -46,8 +46,113 @@
 <title>Wing Chun Videos</title>
 <link rel="stylesheet" type="text/css" href="../css/index.css">
 
+<script LANGUAGE="JavaScript">
+ 		var timeDelay = 10;
+ 		var videoOptions =  "?controls=0&amp;showinfo=1&amp;autoplay=1&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org"
+ 		var randomVideoOptions =  "?controls=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org"
+ 		var randomVideos = [];
+ 		var videos = 
+ 		[
+ 			"https://www.youtube.com/embed/uVkjj8568d8" 
+ 			,"https://www.youtube.com/embed/NkJ6x1tIlY4"
+ 			,"https://www.youtube.com/embed/dTGeH5Fr8p0"
+ 			,"https://www.youtube.com/embed/5AKFNCIJdvA"	
+ 			,"https://www.youtube.com/embed/YWQKA18ADLs"
+ 			,"https://www.youtube.com/embed/6LhRIk_yCQU"
+ 			,"https://www.youtube.com/embed/hBxqptNa6"
+ 			,"https://www.youtube.com/embed/Iq4IdP1YiL8"
+ 			,"https://www.youtube.com/embed/Gd2A8L87v2I"
+ 			,"https://www.youtube.com/embed/g4fKTwi1F_o"
+ 			,"https://www.youtube.com/embed/HEH3kzYCEDs"
+ 			,"https://www.youtube.com/embed/upwyWKzozII"
+ 			,"https://www.youtube.com/embed/QH13kYFzfFk"
+ 			,"https://www.youtube.com/embed/DhETnNWajrA"
+ 		];
+
+ 		var arrayLength = videos.length;
+ 		timeDelay *= 1000;
+ 		var PicCurrentNum = 0;
+ 		var PicCurrent = new Image();
+ 		PicCurrent.src = videos[PicCurrentNum];
+
+ 		function getNextRandomVideo() {
+ 			var idx = Math.floor(Math.random() * 100);
+ 			idx = idx % arrayLength;
+ 			return idx; 
+ 		}
+
+ 		function randomVideoIndexes(requiredVideos) {
+ 			var arr = []
+ 			while(arr.length < requiredVideos){
+ 				var randomnumber=getNextRandomVideo();
+ 				var found=false;
+ 				for(var i=0;i<arr.length;i++){
+ 					if(arr[i]==randomnumber){found=true;break}
+ 				}
+ 				if(!found)arr[arr.length]=randomnumber;
+ 			}
+ 			return arr;
+ 		}
+
+ 		function startVideos() {
+ 			var randomIndexes = randomVideoIndexes(4);
+ 			document.getElementById("ytplayer1").src = videos[randomIndexes[0]]+randomVideoOptions;
+ 			document.getElementById("ytplayer2").src = videos[randomIndexes[1]]+randomVideoOptions;
+ 			document.getElementById("ytplayer3").src = videos[randomIndexes[2]]+randomVideoOptions;
+ 			document.getElementById("ytplayer4").src = videos[randomIndexes[3]]+randomVideoOptions;
+
+ 			setInterval("slideshow()", timeDelay);
+
+ 		}
+ 		function slideshow() {
+ 			PicCurrentNum++;
+ 			if (PicCurrentNum == arrayLength) {
+ 				PicCurrentNum = 0;
+ 			}
+ 			PicCurrent.src = videos[PicCurrentNum];
+ 			var srcString = PicCurrent.src + videoOptions
+ 			document.getElementById("ytplayer").src = srcString;
+
+			//document.getElementById('ytplayer').mute();
+		}
+
+	</script>
+
 </head>
-<body>
+<body OnLoad="startVideos()">
+
+<div id='slideshow'>
+<iframe id="ytplayer" width="100%" height="75%" volume: silent
+	src="https://www.youtube.com/embed/uVkjj8568d8?controls=0&amp;showinfo=1&amp;autoplay=1&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org">
+	</iframe>
+
+<div class="slideshow-overlay">
+	<h1>Wing Chun</h1>
+</div>
+
+<!--
+PART C3
+-->
+<div align="center">
+	<iframe id="ytplayer1" width="20%" height="25%" volume: silent
+	src="https://www.youtube.com/embed/uVkjj8568d8?controls=0&amp;showinfo=1&amp;autoplay=0&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org">
+	</iframe>
+
+	<iframe id="ytplayer2" width="20%" height="25%" volume: silent
+	src="https://www.youtube.com/embed/uVkjj8568d8?controls=0&amp;showinfo=1&amp;autoplay=0&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org">
+	</iframe>
+
+	<iframe id="ytplayer3" width="20%" height="25%" volume: silent
+	src="https://www.youtube.com/embed/uVkjj8568d8?controls=0&amp;showinfo=1&amp;autoplay=0&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org">
+	</iframe>
+
+	<iframe id="ytplayer4" width="20%" height="25%" volume: silent
+	src="https://www.youtube.com/embed/uVkjj8568d8?controls=0&amp;showinfo=1&amp;autoplay=0&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org">
+	</iframe>
+
+</div>
+</div>
+
 
 		<div id='start'>
 		<h1>Start Up Page!</h1>
@@ -57,7 +162,8 @@
      <?php
         if(!isset($_SESSION['username']))
         {
-            echo "<div class='topcorner'>
+            echo $_SESSION["username"];
+			echo "<div>
             <form name='loginForm' action='loginFile.php' method='post' >
             <p>Login here!<br></p>
 		    Username:
@@ -71,11 +177,13 @@
 	        <a href='registration.php' ><span style ='color:blue;'> Click here to register</span></a>
             <br><input type='checkbox' name='cookiecheck' value='Yes' /> Remember Username and Password? <br
             </form><br><br>";
+			echo $_SESSION["username"] . "</div>";
         }
         else
         {
             $username = $_SESSION["username"];
-            echo "<div class='topcorner'>";
+            //echo "<div class='topcorner'>";
+			echo "<div>";
             echo ("<br>Hello, $username!<br>");
 			echo "<ul>";
 			echo "<li><a href='./homepage.php'>Home</a></li>";
@@ -148,6 +256,7 @@
 				print("<th>View Count</th>");
 				print("<th>Video Type</th>");
 				print("<th>Tags</th>");
+				print("<th>Category</th>");
 				print("<th>Add To Favorite</th>");
 			print("</tr>");
 			$output=getVideos();
@@ -171,6 +280,7 @@
 				print("<td>{$output[$x][7]}</td>");
 				print("<td>{$output[$x][8]}</td>");
 				print("<td>{$output[$x][10]}</td>");
+				print("<td>{$output[$x][11]}</td>");
 				
 				//add favorite form
 				print("
@@ -201,7 +311,7 @@ include 'DBconstants.php';
 
 	global $display;
 $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
-	$query = "select * from fun_video;";
+	$query = "select * from fun_video_all;";
 		if ($con->connect_error) {
     die("Connection failed: " . $con->connect_error);
 } 
