@@ -6,3 +6,7 @@ body {
 div {
 	margin: 20px;
 }
+
+li {
+    display: inline;
+}
