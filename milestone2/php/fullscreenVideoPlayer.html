@@ -17,6 +17,7 @@
  	<script LANGUAGE="JavaScript">
  		var timeDelay = 10;
  		var videoOptions =  "?controls=0&amp;showinfo=1&amp;autoplay=1&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org"
+ 		var randomVideoOptions =  "?controls=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org"
  		var randomVideos = [];
  		var videos = 
  		[
@@ -48,24 +49,6 @@
  			return idx; 
  		}
 
- 		function getUniqueNextRandomVideo() {
- 			var isContinue = true;
- 			var idx;
- 			while (isContinue) {
- 				isContinue = false;
- 				idx = getNextRandomVideo();
- 				for (var i = 0; i < randomVideos.length; i++) {
- 					if (randomVideos[i] == idx) {
- 						isContinue = true;
- 						break; //in use already
- 					}
- 				}
-
- 			}
- 			randomVideos[randomVideos.length] = idx;
- 			return idx;
- 		}
-
  		function randomVideoIndexes(requiredVideos) {
  			var arr = []
  			while(arr.length < requiredVideos){
@@ -81,10 +64,10 @@
 
  		function startVideos() {
  			var randomIndexes = randomVideoIndexes(4);
- 			document.getElementById("ytplayer1").src = videos[randomIndexes[0]];
- 			document.getElementById("ytplayer2").src = videos[randomIndexes[1]];
- 			document.getElementById("ytplayer3").src = videos[randomIndexes[2]];
- 			document.getElementById("ytplayer4").src = videos[randomIndexes[3]];
+ 			document.getElementById("ytplayer1").src = videos[randomIndexes[0]]+randomVideoOptions;
+ 			document.getElementById("ytplayer2").src = videos[randomIndexes[1]]+randomVideoOptions;
+ 			document.getElementById("ytplayer3").src = videos[randomIndexes[2]]+randomVideoOptions;
+ 			document.getElementById("ytplayer4").src = videos[randomIndexes[3]]+randomVideoOptions;
 
  			setInterval("slideshow()", timeDelay);
 
@@ -107,7 +90,7 @@
 <BODY OnLoad="startVideos()">
 	<iframe id="ytplayer" width="100%" height="75%" volume: silent
 	src="https://www.youtube.com/embed/uVkjj8568d8?controls=0&amp;showinfo=1&amp;autoplay=1&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org">
-</iframe>
+	</iframe>
 
 <div class="slideshow-overlay">
 	<h1>Wing Chun</h1>
@@ -116,19 +99,19 @@
 <div align="center">
 	<iframe id="ytplayer1" width="20%" height="25%" volume: silent
 	src="https://www.youtube.com/embed/uVkjj8568d8?controls=0&amp;showinfo=1&amp;autoplay=0&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org">
-</iframe>
+	</iframe>
 
-<iframe id="ytplayer2" width="20%" height="25%" volume: silent
-src="https://www.youtube.com/embed/uVkjj8568d8?controls=0&amp;showinfo=1&amp;autoplay=0&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org">
-</iframe>
+	<iframe id="ytplayer2" width="20%" height="25%" volume: silent
+	src="https://www.youtube.com/embed/uVkjj8568d8?controls=0&amp;showinfo=1&amp;autoplay=0&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org">
+	</iframe>
 
-<iframe id="ytplayer3" width="20%" height="25%" volume: silent
-src="https://www.youtube.com/embed/uVkjj8568d8?controls=0&amp;showinfo=1&amp;autoplay=0&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org">
-</iframe>
+	<iframe id="ytplayer3" width="20%" height="25%" volume: silent
+	src="https://www.youtube.com/embed/uVkjj8568d8?controls=0&amp;showinfo=1&amp;autoplay=0&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org">
+	</iframe>
 
-<iframe id="ytplayer4" width="20%" height="25%" volume: silent
-src="https://www.youtube.com/embed/uVkjj8568d8?controls=0&amp;showinfo=1&amp;autoplay=0&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org">
-</iframe>
+	<iframe id="ytplayer4" width="20%" height="25%" volume: silent
+	src="https://www.youtube.com/embed/uVkjj8568d8?controls=0&amp;showinfo=1&amp;autoplay=0&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org">
+	</iframe>
 
 </div>
 </BODY>
