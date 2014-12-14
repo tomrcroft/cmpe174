@@ -8,6 +8,14 @@ session_start();
 	</head>
 	
 	<body>
+		<ul>
+			<li><a href='./homepage.php'>Home</a></li>
+			<li><a href='./addVideo.php'>Add Video</a></li>
+			<li><a href='./viewVideos.php'>View Videos</a></li>
+			<li><a href='./editProfile.php'>Edit Profile</a></li>
+			<li><a href='./logout.php'>Logout</a></li>
+		</ul>
+	
 		<form action="inputVideo.php" method="post">
 			
 			<div id='titleDiv'>
@@ -78,12 +86,12 @@ session_start();
 				<input type='submit' value='Submit'>
 			</div>
 			<?php
-				print("<h2><a href='./viewVideos.php'>View Videos!</a></h2>");
-				print("<h2><a href='./homepage.php'>Go Back Home!</a></h2>");	
-				if(isset($_SESSION))
-				{
-					print ("<a href='./logout.php'>Logout</a>");
-				}
+				// print("<h2><a href='./viewVideos.php'>View Videos!</a></h2>");
+				// print("<h2><a href='./homepage.php'>Go Back Home!</a></h2>");	
+				// if(isset($_SESSION))
+				// {
+					// print ("<a href='./logout.php'>Logout</a>");
+				// }
 				if($_SESSION['admin'])
 				{
 					print ("<h2><a href='./editVideo.php'>Edit a Video!</a></h2>");
