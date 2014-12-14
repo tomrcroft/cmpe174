@@ -96,7 +96,7 @@
 
             ?>
     <br><br>
-    <form id="selectForm" action="newIndex.php" method="post">
+    <form id="selectForm" action="index.php" method="post">
 			<select id='sortBy' name='sortBy'>
 				<option value="Title" selected>Title</option>
 				<option value="Length">Length</option>
