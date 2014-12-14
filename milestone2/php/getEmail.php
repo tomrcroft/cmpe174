@@ -4,15 +4,20 @@
 		  <link rel="stylesheet" type="text/css" href="../css/editProfileStyle.css">
     </head>
     <body>
-			<h1>Change Email</h1>
+	 			<ul>
+					<li><a href='./homepage.php'>Home</a></li>
+					<li><a href='./addVideo.php'>Add Video</a></li>
+					<li><a href='./viewVideos.php'>View Videos</a></li>
+					<li><a href='./editProfile.php'>Edit Profile</a></li>
+					<li><a href='./logout.php'>Logout</a></li>
+				</ul>
+				<h1>Change Email</h1>
             <form action="changeEmail.php" method="post">
 				<p>New Email:
 				<input type="email" name="myusername"></p>
 				<p>Password:
 				<input type="password" name="pass"></p>
 				<p><input type="submit" name="submit" value="Submit"></p>
-				<br>
-				<p><a href="homepage.php">Back to your homepage</a></p>
             </form>
         </div>
     </body>
