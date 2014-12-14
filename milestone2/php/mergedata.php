@@ -13,7 +13,7 @@
 			include("DBconstants.php");
             $conn = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
             $query_all = "SELECT * FROM fun_video_all";
-			$query_count = "SELECT id, title, viewcount FROM fun_video_all where id > 0 AND viewcount < 50000";
+			$query_count = "DELETE FROM fun_video_all where id > 0 AND viewcount < 50000";
 			$query_duplicate_title = "SELECT videolink, count(right(videolink,11)) AS x, id FROM fun_video_all GROUP BY videolink HAVING x > 1 ";
 			$query_domain = "SELECT * FROM fun_video_all where title NOT LIKE '%Tai Chi%' AND title NOT LIKE '%Taichi%' AND title NOT LIKE '%Taiji%' AND title NOT LIKE '%tai ji%' AND title NOT LIKE '%Wing Chun%' AND title NOT LIKE '%Wing Tsun%' AND title NOT LIKE '%Yang Taichi%' AND 
             title NOT LIKE '%Chen Taichi%' AND title NOT LIKE '%Qi Gong%' AND title NOT LIKE '%Qigong%' AND title NOT LIKE '%Shaolin%' AND title NOT LIKE '%Taekwondo%' AND title NOT LIKE '%Tae kwon%' AND title NOT LIKE '%Tae-kwon%' AND title NOT LIKE '%Tae kwon do%' AND title NOT LIKE '%Aikido%' AND title NOT LIKE '%Judo%' AND id > 0";
@@ -21,17 +21,14 @@
             $result = mysqli_query($conn, $query_count);
             $resultArray = mysqli_fetch_all($result, MYSQLI_BOTH);
             echo("<h2>Titles with count less than 50,000</h2><br>");
-            if($resultArray)
+            if( mysqli_query($conn, $query_count))
             {
-                for($x = 0; $x < sizeof($resultArray); $x++)
-                {
-                    $y = $x + 1;
-                    echo "<b>#", $y, " </b>:";
-                    echo("{$resultArray[$x][1]} ");
-                    echo(" with count : {$resultArray[$x][2]}");
-                    echo("<br>");
-                }
-            }
+				printf("Affected rows (DELETE): %d\n", mysqli_affected_rows($conn));
+			}
+			else
+			{
+				#echo("<p>Nothing to see here, move along.<p>");
+			}
             /*if(mysqli_query($conn, $query_count))
 			{
 				//printf("Affected rows (DELETE): %d\n", mysqli_affected_rows($conn));
@@ -84,10 +81,21 @@
                     }
                 }
             }
-            echo("<br");
+            echo("<br>");
+
+            echo(count($ids));
+            echo(" duplicate(s) to be deleted.<br>");
             foreach($ids as $id)
             {
-                print("ID: $id<br>");
+                $query = "DELETE FROM fun_video_all where id = $id";
+                if( mysqli_query($conn, $query))
+                {
+				    printf("Affected rows (DELETE): %d\n", mysqli_affected_rows($conn));
+			    }
+			    else
+			    {
+				    #echo("<p>Nothing to see here, move along.<p>");
+			    }
             }
 
 	
@@ -105,7 +113,7 @@
 			$result = mysqli_query($conn, $query_tag);
 			$resultArray = mysqli_fetch_all($result, MYSQLI_BOTH);
 
-			/*if($resultArray)
+			if($resultArray)
 			{
 				$remove = "very,like,them,his,That,at,how,the,be,vs.,to,of,and,a,in,that,have,I,for,you,use,In,The,this,or,Here,This,is,to,my,Just,my,from,are,A,its,was,on";
 				$remove = explode(",", $remove);
@@ -193,7 +201,7 @@
 			else
 			{
 				echo("<p>Nothing to see here, move along.<p>");
-			}*/
+			}
 			mysqli_close($conn);
 
 			print("<h2><a href='./viewVideos.php'>View Videos!</a><h2>");
