@@ -46,7 +46,7 @@
 <title>Wing Chun Videos</title>
 <link rel="stylesheet" type="text/css" href="css/index.css">
 
-<script language="JavaScript">
+<script LANGUAGE="JavaScript">
  		var timeDelay = 10;
  		var videoOptions =  "?controls=0&amp;showinfo=1&amp;autoplay=1&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org"
  		var randomVideoOptions =  "?controls=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org"
