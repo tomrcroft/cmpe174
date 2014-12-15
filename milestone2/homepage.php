@@ -6,6 +6,7 @@
 		header('Location: index.php');
 		exit();
     }
+    $username = $_SESSION["username"];
 ?>
 <html>
 <head>
@@ -15,7 +16,7 @@
 </head>
 <body>
         <?php
-            $username = $_SESSION["username"];
+            
             //echo "<div class='topcorner'>";
 			echo "<div>";
 			echo ("<ul id='navlist'>");
@@ -33,7 +34,7 @@
 
 <?php
 	/**
-	This needs to be hidden is the user is not an admin.
+	This needs to be hidden if the user is not an admin.
 	*/
 	
 	if($_SESSION['admin'])
@@ -49,16 +50,17 @@
 	
 	include 'sessionHandle.php';	
 	$output = array();
-	
+	//var_dump($_SESSION);
 	
 	foreach($_SESSION as $value)
-	{//echo "value is: " .$value;
+	{
+        //echo "value is: " .$value;
 		$con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 		$result = mysqli_query($con,"select * from fun_video_all WHERE videolink='$value'");
 		$resultArray = array();
-	while ($row = mysqli_fetch_array($result,MYSQLI_NUM)) {
-		array_push($resultArray, $row);
-	}
+	    while ($row = mysqli_fetch_array($result,MYSQLI_NUM)) {
+		    array_push($resultArray, $row);
+	    }
 		array_push($output, $resultArray[0]);
 	}
 

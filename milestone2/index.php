@@ -1,13 +1,16 @@
 <?php
 //ini_set("error_log", "http://www.sjsu-cs.org/classes/cs174/sec1/croft/project/php-error.log");
 	session_start();
-		if(!isset($_POST["sortBy"]))
-			$display = "Title";
-		else
-			$display = $_POST["sortBy"];
+    if(isset($_SESSION["username"]))
+        $username = $_SESSION["username"];
+    include 'sessionHandle.php';
+	if(!isset($_POST["sortBy"]))
+		$display = "Title";
+	else
+		$display = $_POST["sortBy"];
 			
-		if(isset($_GET["sortby"]))
-			$display = $_GET["sortby"];
+	if(isset($_GET["sortby"]))
+		$display = $_GET["sortby"];
 	
 	$pagenum = 0;
 			
@@ -121,9 +124,8 @@
 </head>
 <body OnLoad="startVideos()">
 <?php
-        if(!isset($_SESSION['username']))
-        {
-            #echo $_SESSION["username"];
+        if(!$username)
+        { 
 			echo ("<div>");
             echo ("<ul id='navlist'>");
             echo ("<li><form name='loginForm' action='loginFile.php' method='post' ></li>");
@@ -135,11 +137,11 @@
 			echo ("<li><a href='./index.php'>Start Up</a></li>");
 			echo ("<li><a href='./addVideo.php'>Add Video</a></li>"); 
             echo ("</ul>"); 
-			 #$_SESSION["username"]
         }
         else
-        {
-            $username = $_SESSION["username"];
+        { 
+   	
+	        	 
             //echo "<div class='topcorner'>";
 			echo "<div>";
 			echo ("<ul id='navlist'>");
@@ -235,8 +237,8 @@ PART C3
 		</form>
 
 		<?php
-		
-
+        //var_dump($_SESSION);
+        //include 'sessionHandle.php';
 	    print("<br><br>");
 		print("<table id='videos'>");
 			print("<tr>");
@@ -251,7 +253,7 @@ PART C3
 				print("<th>Video Type</th>");
 				print("<th>Tags</th>");
 				print("<th>Category</th>");
-				if(isset($_SESSION['username']))
+				if(isset($username))
 				{
                     print("<th>Add To Favorite</th>");
                 }
@@ -264,6 +266,11 @@ PART C3
 
 			for($x = $pagenum; $x < $pagenumindex; $x++)
 			{
+                $favorite = FALSE;
+                if(isset($_SESSION[$output[$x][2]]))
+                {
+                    $favorite = TRUE;
+                }    
 				print("<tr>");
 				print("<td><a target='_blank' href='{$output[$x][2]}'>
   <img src='{$output[$x][9]}' alt='video image' style='width:42px;height:42px;border:0'>
@@ -280,16 +287,27 @@ PART C3
 				print("<td>{$output[$x][11]}</td>");
 				
 				//add favorite form
-                if(isset($_SESSION['username']))
+                if(isset($username))
 				{
-                    print("
-				    <td>
-					<form action='addFavorite.php' method='post'>
-						<input type='text' style='display:none' name='linkToAdd' value='{$output[$x][2]}'>
-						<input type='submit' name='addToFav' value='Add'>
-					</form>
-				    </td>");
-				    print("</tr>");
+                    if(!$favorite)
+                    {
+                        print("
+				        <td>
+					    <form action='addFavorite.php' method='post'>
+						    <input type='text' style='display:none' name='linkToAdd' value='{$output[$x][2]}'>
+						    <input type='submit' name='addToFav' value='Add'>
+					    </form>
+				        </td>");
+				        print("</tr>");
+                    }
+                    else
+                    {
+                        print("
+                        <td>
+                        <img src='img/fav.png' alt=''>
+                        </td>
+                        ");
+                    }
                 }
 				
 			}
@@ -305,7 +323,7 @@ PART C3
 				print("</div>");
 			
 			function getVideos(){
-include 'DBconstants.php';
+//include 'DBconstants.php';
 
 
 	global $display;

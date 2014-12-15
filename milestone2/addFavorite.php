@@ -16,15 +16,20 @@
 <body>
 
 <?php
+    //echo $_POST['linkToAdd'];
 	$link = $_POST['linkToAdd'];
 	include 'sessionHandle.php';
 	
 	if(isset($_SESSION["$link"]))
 		print ("<p><h1>This Video is already in your favorites!</h1></p>");
 	else
-		{$_SESSION["$link"] = $link; 		print ("<p><h1>This Video has been added to your favorites!</h1></p>");}
-		
-		print ("<p><a href='./index.php'>Back to to the index.</a></p>");
+    {
+        $_SESSION["$link"] = $link; 		
+        //var_dump($_SESSION);
+        print ("<p><h1>This Video has been added to your favorites!</h1></p>");
+    }
+		    print ("<p><a href='./index.php'>Back to to the index.</a></p>");
+
 ?>
 
 </body>
