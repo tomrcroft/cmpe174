@@ -59,25 +59,19 @@
 
 </head>
 <body>
-
-         <?php
-
-        
-        
+        <?php
             $username = $_SESSION["username"];
-            echo "<div>";
-            echo ("<br>Hello, $username!<br>");
-            echo "</div>";
-            ?>
-<ul>
-	<li><a href='./homepage.php'>Home</a></li>
-	<li><a href='./index.php'>Start Up</a></li>
-
-	<li><a href='./addVideo.php'>Add Video</a></li>
-
-	<li><a href='./editProfile.php'>Edit Profile</a></li>
-	<li><a href='./logout.php'>Logout</a></li>
-</ul>
+            //echo "<div class='topcorner'>";
+			echo "<div>";
+			echo ("<ul id='navlist'>");
+            echo ("<li>Hello, $username!</li>");
+			echo "<li><a href='./homepage.php'>Home</a></li>";
+			echo "<li><a href='./index.php'>Start Up</a></li>";
+			echo "<li><a href='./addVideo.php'>Add Video</a></li>"; 
+			echo "<li><a href='./editProfile.php'>Edit Profile</a></li>";
+			echo "<li><a href='./logout.php'>Logout</a></li>";
+			echo "</ul>";
+?>
 
 
      <?php
@@ -98,12 +92,12 @@
     			<?php
 
                 echo("<form id='search' action='editVideo.php' method='POST'>");
-                echo("<input type='submit' value='Search'><input type='text' name='search'>");
+                echo("<input type='text' name='search'><input type='submit' value='Search'>");
                 echo("</form>");
 
             ?>
     <br><br>
-    <form id="selectForm" action="newIndex.php" method="post">
+    <form id="selectForm" action="editVideo.php" method="post">
 			<select id='sortBy' name='sortBy'>
 				<option value="Title" selected>Title</option>
 				<option value="Length">Length</option>
@@ -120,10 +114,6 @@
 
 			
 			Currently Sorted by: <?= $display;?>
-			<div id="addVideoDiv">
-			<a href="./addVideo.php">Add a Video!</a>
-			<br>
-			</div>
 			
 		</form>
 
@@ -135,6 +125,7 @@
 			print("<tr>");
 				print("<th>Video Image</th>");
 				print("<th>Video Link</th>");
+                print("<th>Video Image Link</th>");
 				print("<th>Video Title</th>");
 				print("<th>Video Length</th>");
 				print("<th>Highest Resolution</th>");
@@ -143,7 +134,7 @@
 				print("<th>View Count</th>");
 				print("<th>Video Type</th>");
 				print("<th>Tags</th>");
-				print("<th>Add To Favorite</th>");
+                print("<th>Category</th>"); 
 			print("</tr>");
 			//$output=getVideos();
 			if((sizeof($output) - $pagenum) < 10)
@@ -185,13 +176,14 @@
 				printType("Others", $output[$x][8]);
 				print("</select></td>");
 				print("<td><input type='text' name='tags' value='{$output[$x][10]}'></td>");
+                print("<td><input type='text' name='category' value='{$output[$x][11]}'></td>");
 				print("<td><input type='submit' value='Update'></td>");
 				print("</tr>");
 				print("</form>");
 				
 			}
 			
-			function printResolution($res, $actual)
+function printResolution($res, $actual)
 {
 	$printp = $res . "p";
 	if ($actual == $res)

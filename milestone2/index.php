@@ -46,7 +46,7 @@
 <title>Wing Chun Videos</title>
 <link rel="stylesheet" type="text/css" href="css/index.css">
 
-<script LANGUAGE="JavaScript">
+<script language="JavaScript">
  		var timeDelay = 10;
  		var videoOptions =  "?controls=0&amp;showinfo=1&amp;autoplay=1&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org"
  		var randomVideoOptions =  "?controls=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org"
@@ -120,7 +120,41 @@
 
 </head>
 <body OnLoad="startVideos()">
-
+<?php
+        if(!isset($_SESSION['username']))
+        {
+            #echo $_SESSION["username"];
+			echo ("<div>");
+            echo ("<ul id='navlist'>");
+            echo ("<li><form name='loginForm' action='loginFile.php' method='post' ></li>");
+            echo ("<li>Login here! Username:<input name='username' type='email' id='usernameInput'></li>");
+            echo ("<li>Password: <input name='password' type='password' id='passwordInput'> <input class='b' type='submit' name='submit' value='Login'></li>");
+	        echo ("<li><a href='registration.php' ><span style ='color:blue;'> Click here to register</span></a></li>");
+            echo ("<li><input type='checkbox' name='cookiecheck' value='Yes' /> Remember Username and Password?</form></li>");
+            
+			echo ("<li><a href='./index.php'>Start Up</a></li>");
+			echo ("<li><a href='./addVideo.php'>Add Video</a></li>"); 
+            echo ("</ul>"); 
+			 #$_SESSION["username"]
+        }
+        else
+        {
+            $username = $_SESSION["username"];
+            //echo "<div class='topcorner'>";
+			echo "<div>";
+			echo ("<ul id='navlist'>");
+            echo ("<li>Hello, $username!</li>");
+			echo "<li><a href='./homepage.php'>Home</a></li>";
+			echo "<li><a href='./index.php'>Start Up</a></li>";
+			echo "<li><a href='./addVideo.php'>Add Video</a></li>"; 
+			echo "<li><a href='./editProfile.php'>Edit Profile</a></li>";
+			echo "<li><a href='./logout.php'>Logout</a></li>";
+			echo "</ul>";
+        }
+        echo  "</div>";
+           
+        ?>
+</div>
 <div id='slideshow'>
 <iframe id="ytplayer" width="100%" height="75%" volume: silent
 	src="https://www.youtube.com/embed/uVkjj8568d8?controls=0&amp;showinfo=1&amp;autoplay=1&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fwww.sjsu-cs.org">
@@ -156,48 +190,7 @@ PART C3
 
 		<div id='start'>
 		<h1>Start Up Page!</h1>
-		</div>
 
-
-     <?php
-        if(!isset($_SESSION['username']))
-        {
-            #echo $_SESSION["username"];
-			echo "<div>
-            <form name='loginForm' action='loginFile.php' method='post' >
-            <p>Login here!<br></p>
-		    Username:
-		    <input name='username' type='email' id='usernameInput'>
-            <br>
-		    Password:
-		    <input name='password' type='password' id='passwordInput'>
-            <br>
-            <input class='b' type='submit' name='submit' value='Login'>
-            <br>
-	        <a href='registration.php' ><span style ='color:blue;'> Click here to register</span></a>
-            <br><input type='checkbox' name='cookiecheck' value='Yes' /> Remember Username and Password? <br
-            </form><br><br>";
-			echo  "</div>"; #$_SESSION["username"]
-        }
-        else
-        {
-            $username = $_SESSION["username"];
-            //echo "<div class='topcorner'>";
-			echo "<div>";
-            echo ("<br>Hello, $username!<br>");
-			echo "<ul>";
-			echo "<li><a href='./homepage.php'>Home</a></li>";
-			echo "<li><a href='./index.php'>Start Up</a></li>";
-			echo "<li><a href='./addVideo.php'>Add Video</a></li>";
-			//echo "<li><a href='./viewVideos.php'>View Videos</a></li>";
-			echo "<li><a href='./editProfile.php'>Edit Profile</a></li>";
-			echo "<li><a href='./logout.php'>Logout</a></li>";
-			echo "</ul>";
-        }
-
-           
-        ?>
-</div>
     			<?php
 
                 echo("<form id='search' action='search.php' method='POST'>");
@@ -205,6 +198,7 @@ PART C3
                 echo("</form>");
 
             ?>
+            </div>
     <br><br>
     <form id="selectForm" action="index.php" method="post">
 			<select id='sortBy' name='sortBy'>
@@ -226,7 +220,7 @@ PART C3
 
 			
 			<?php
-			if(isset($_SESSION['admin']))
+			/*if(isset($_SESSION['admin']))
 			{
 				if($_SESSION['admin'])
 				{
@@ -235,7 +229,7 @@ PART C3
 					echo "<br>";
 					echo "</div>";
 				}
-			}
+			}*/
 			?>
 			
 		</form>

@@ -55,62 +55,47 @@
 
 </head>
 <body>
-                     <?php
-            if ( isset($_SESSION["username"]))
-            {
-                $username = $_SESSION["username"];
-                echo "<div>";
-                echo ("Hello, $username!<br>");
-                echo "</div>";
-            }
-            ?>
-<ul>
-	<li><a href='./homepage.php'>Home</a></li>
-	<li><a href='./index.php'>Start Up</a></li>
-
-	<li><a href='./addVideo.php'>Add Video</a></li> 
-	<li><a href='./editProfile.php'>Edit Profile</a></li>
-	<li><a href='./logout.php'>Logout</a></li>
-</ul>
-
-
-     <?php
+<?php
         if(!isset($_SESSION['username']))
         {
-            echo "<div class='topcorner'>
-            <form name='loginForm' action='loginFile.php' method='post' >
-            <p>Login here!<br></p>
-		    Username:
-		    <input name='username' type='email' id='usernameInput'>
-            <br>
-		    Password:
-		    <input name='password' type='password' id='passwordInput'>
-            <br>
-            <input class='b' type='submit' name='submit' value='Login'>
-            <br>
-	        <a href='registration.php' ><span style ='color:blue;'> Click here to register</span></a>
-            <br><input type='checkbox' name='cookiecheck' value='Yes' /> Remember Username and Password? <br
-            </form><br><br>";
+            #echo $_SESSION["username"];
+			echo ("<div>");
+            echo ("<ul id='navlist'>");
+            echo ("<li><form name='loginForm' action='loginFile.php' method='post' ></li>");
+            echo ("<li>Login here! Username:<input name='username' type='email' id='usernameInput'></li>");
+            echo ("<li>Password: <input name='password' type='password' id='passwordInput'> <input class='b' type='submit' name='submit' value='Login'></li>");
+	        echo ("<li><a href='registration.php' ><span style ='color:blue;'> Click here to register</span></a></li>");
+            echo ("<li><input type='checkbox' name='cookiecheck' value='Yes' /> Remember Username and Password?</form></li>");
+            
+			echo ("<li><a href='./index.php'>Start Up</a></li>");
+			echo ("<li><a href='./addVideo.php'>Add Video</a></li>"); 
+            echo ("</ul>"); 
+			 #$_SESSION["username"]
         }
         else
         {
             $username = $_SESSION["username"];
-            echo "<div>";
-            echo ("<br>Hello, $username!<br>");
-            echo "<a href='homepage.php'> <span stile ='color:blue;'>Go to Homepage</span></a><br>";
-            echo "<a href='./logout.php'>Logout</a>";
-            echo "</div>";
+            //echo "<div class='topcorner'>";
+			echo "<div>";
+			echo ("<ul id='navlist'>");
+            echo ("<li>Hello, $username!</li>");
+			echo "<li><a href='./homepage.php'>Home</a></li>";
+			echo "<li><a href='./index.php'>Start Up</a></li>";
+			echo "<li><a href='./addVideo.php'>Add Video</a></li>"; 
+			echo "<li><a href='./editProfile.php'>Edit Profile</a></li>";
+			echo "<li><a href='./logout.php'>Logout</a></li>";
+			echo "</ul>";
         }
-
+        echo  "</div>";
            
         ?>
 </div>
     			<?php
-
+                /*
                 echo("<form id='search' action='search.php' method='POST'>");
                 echo("<input type='submit' value='Search'><input type='text' name='search'>");
                 echo("</form>");
-
+                */
             ?>
     <br><br>
     <form id="selectForm" action="index.php" method="post">
@@ -124,25 +109,18 @@
 			</select>
 			
 			<input type='submit' value='Submit'>
-			
-						<br>
-			
+			<br>
+			Currently Sorted by: <?= $display;?>
 
 			
-			Currently Sorted by: <?= $display;?>
-			<div id="addVideoDiv">
-			<a href="./addVideo.php">Add a Video!</a>
-			<br>
-			</div>
-			
 			<?php
-			if($_SESSION['admin'])
+			/*if($_SESSION['admin'])
 			{
 				echo "<div id='editVideoDiv'>";
 				echo "<a href='./editVideo.php'>Edit a Video!</a>";
 				echo "<br>";
 				echo "</div>";
-			}
+			}*/
 			?>
 			
 		</form>
@@ -208,6 +186,7 @@
 			
 			print("<div id='paginationDiv'>");
 				echo("<form id='pagination' action='search.php' method='GET'>");
+                
 				echo "<input type='text' style='display:none' name='search' value='$search'>";
 				echo "<input type='text' style='display:none' name='pagenum' value='$pagenum'>";
 				echo "<input type='text' style='display:none' name='sortby' value='$display'>";

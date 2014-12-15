@@ -21,7 +21,7 @@ td{
 
 body {
 	background-color: grey;
-
+    text-align:  center;
 }
 
 #mya {
@@ -36,3 +36,9 @@ body {
 	text-align: center;
 	}
 
+#navlist li
+{
+display: inline;
+list-style-type: none;
+padding-right: 20px;
+}

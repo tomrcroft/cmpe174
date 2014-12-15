@@ -19,13 +19,14 @@ $type = implode(",",$_POST["type"]);
 $image = $_POST["imagelink"];
 $tags = $_POST["tags"];
 $id = $_POST["id"];
+$category = $_POST['category'];
 
 $conn = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 
 if (mysqli_connect_errno()) {
 		die("Failed to connect to MySQL: " . mysqli_connect_error());}
 $query = "UPDATE fun_video_all SET title='$title', videolink='$link', videolength='$length', highestresolution='$res', description='$description',
-	language='$language', viewcount='$views', videotype='$type', iconimage='$image', tag='$tags' WHERE id = '$id'";
+	language='$language', viewcount='$views', videotype='$type', iconimage='$image', tag='$tags', category='$category' WHERE id = '$id'";
 // print $query;
 if (mysqli_query($conn, $query))
 {

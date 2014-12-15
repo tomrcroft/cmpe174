@@ -15,21 +15,18 @@
 </head>
 <body>
         <?php
-        $username = $_SESSION["username"];
-        echo "<div>";
-        echo ("Hello, $username!<br>");
-        echo "</div>";
-    ?>
-<ul>
-	<li><a href='./homepage.php'>Home</a></li>
-	<li><a href='./index.php'>Start Up</a></li>
-
-	<li><a href='./addVideo.php'>Add Video</a></li>
-
-	<li><a href='./editProfile.php'>Edit Profile</a></li>
-	<li><a href='./logout.php'>Logout</a></li>
-</ul>
-
+            $username = $_SESSION["username"];
+            //echo "<div class='topcorner'>";
+			echo "<div>";
+			echo ("<ul id='navlist'>");
+            echo ("<li>Hello, $username!</li>");
+			echo "<li><a href='./homepage.php'>Home</a></li>";
+			echo "<li><a href='./index.php'>Start Up</a></li>";
+			echo "<li><a href='./addVideo.php'>Add Video</a></li>"; 
+			echo "<li><a href='./editProfile.php'>Edit Profile</a></li>";
+			echo "<li><a href='./logout.php'>Logout</a></li>";
+			echo "</ul>";
+?>
 
 <h1> Welcome to the Homepage! </h1>
 

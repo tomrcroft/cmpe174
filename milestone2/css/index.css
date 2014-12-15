@@ -1,5 +1,5 @@
 body {
-	text-align: left;
+	text-align: center;
 	background-color: grey;
 }
 
@@ -34,7 +34,12 @@ th {
 td{
 	background-color: white;
 }
-
+#navlist li
+{
+display: inline;
+list-style-type: none;
+padding-right: 20px;
+}
 .slideshow-overlay {
  			position: absolute;
  			width: 100%;

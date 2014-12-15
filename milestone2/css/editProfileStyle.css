@@ -7,8 +7,13 @@ text-align:center;
 }
 
 body {
-
+text-align: center;
 background-color: grey;
 }
-
+#navlist li
+{
+display: inline;
+list-style-type: none;
+padding-right: 20px;
+}
 

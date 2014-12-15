@@ -3,7 +3,9 @@ include 'DBconstants.php';
   
 $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
  $username = $_SESSION['username'];
  //echo "before username:" . $username;

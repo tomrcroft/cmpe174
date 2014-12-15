@@ -8,29 +8,38 @@ session_start();
 	</head>
 	
 	<body>
-            <?php
-            if ( isset($_SESSION['username']))
-            {
-                $username = $_SESSION['username'];
-                echo ('<div>');
-                echo ("Hello, $username!<br>");
-                echo "</div>";
-            }
-            ?>
-	<ul>
-	<li><a href='./homepage.php'>Home</a></li>
-	<li><a href='./index.php'>Start Up</a></li>
-
-	<li><a href='./addVideo.php'>Add Video</a></li> 
         <?php
-            if ( isset($_SESSION['username']))
+            
+            //echo "<div class='topcorner'>";
+			echo "<div>";
+			echo ("<ul id='navlist'>");
+            $has_username = FALSE;
+            if (isset($_SESSION['username']))
             {
-	            print "<li><a href='./editProfile.php'>Edit Profile</a></li>";
+                $has_username = TRUE;
+                $username = $_SESSION["username"];
+                echo ("<li>Hello, $username!</li>");
+			    echo "<li><a href='./homepage.php'>Home</a></li>";
             }
-    ?>
-	<li><a href='./logout.php'>Logout</a></li>
-</ul>
-	
+            else
+            {
+                echo ("<li><form name='loginForm' action='loginFile.php' method='post' ></li>");
+                echo ("<li>Login here! Username:<input name='username' type='email' id='usernameInput'></li>");
+                echo ("<li>Password: <input name='password' type='password' id='passwordInput'> <input class='b' type='submit' name='submit' value='Login'></li>");
+	            echo ("<li><a href='registration.php' ><span style ='color:blue;'> Click here to register</span></a></li>");
+                echo ("<li><input type='checkbox' name='cookiecheck' value='Yes' /> Remember Username and Password?</form></li>");
+            
+            }
+            
+			echo "<li><a href='./index.php'>Start Up</a></li>";
+			echo "<li><a href='./addVideo.php'>Add Video</a></li>"; 
+            if($has_username)
+			{
+                echo "<li><a href='./editProfile.php'>Edit Profile</a></li>";
+			    echo "<li><a href='./logout.php'>Logout</a></li>";
+            }
+			echo "</ul>";
+?>
 		<form id='editVid' action="inputVideo.php" method="post">
 			
 			<div id='titleDiv'>
@@ -96,7 +105,23 @@ session_start();
 				Enter Video Tags (each must be seperated by a comma): <br>
 				<textarea name='tags'></textarea>
 			</div>
-			
+			<div id='categoryDiv'>
+				Select category:<br> 
+				<select name="category">
+					<option value="Yang Taichi">Yang Taichi</option>
+					<option value="Chen Taichi">Chen Taichi</option>
+					<option value="Sun Taichi">Sun Taichi</option>
+					<option value="Wu Taichi">Wu Taichi</option>
+					<option value="QiGong">QiGong</option>
+					<option value="Shaolin">Shaolin</option>
+                    <option value="Tae kwon do">Tae kwon do</option>
+					<option value="Wing Chun">Wing Chun</option>
+                    <option value="Aikido">Aikido</option>
+					<option value="Judo">Judo</option>
+                    <option value="KungFu Movie">KungFu Movie</option>
+				</select>
+			</div>
+
 			<div id='submitDiv'>
 				<input type='submit' value='Submit'>
 			</div>
@@ -107,13 +132,14 @@ session_start();
 				// {
 					// print ("<a href='./logout.php'>Logout</a>");
 				// }
-                if($_session)
-				if($_SESSION['admin'])
-				{
-					print ("<h2><a href='./editVideo.php'>Edit a Video!</a></h2>");
-					//print ("<h2><a href='./cleandata.php'>Clean the data</a></h2>");
-				
-				}				
+                if(isset($_SESSION['admin']))
+				{    
+                    if($_SESSION['admin'])
+				    {
+					    print ("<h2><a href='./editVideo.php'>Edit a Video!</a></h2>");
+					    //print ("<h2><a href='./cleandata.php'>Clean the data</a></h2>");
+				    }
+                }				
 
 			?>
 		</form>

@@ -38,7 +38,7 @@ $views = $_POST["views"];
 $type = implode(",",$_POST["type"]);
 $image = $_POST["image"];
 $tags = $_POST["tags"];
-
+$category = $_POST["category"];
 
 
 $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
@@ -46,10 +46,8 @@ $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 if (mysqli_connect_errno()) {
 		die("Failed to connect to MySQL: " . mysqli_connect_error());}
 
-$result = mysqli_query($con, "insert into fun_video_all (title, videolink, videolength, highestresolution, description, language, viewcount, videotype, iconimage, tag)
-					VALUES('$title', '$link', $length, '$res', '$description', '$language', $views, '$type', '$image', '$tags');");
-		
-
+$result = mysqli_query($con, "insert into fun_video_all (title, videolink, videolength, highestresolution, description, language, viewcount, videotype, iconimage, tag, category)
+					VALUES('$title', '$link', $length, '$res', '$description', '$language', $views, '$type', '$image', '$tags', '$category);");
 		
 if($result == true)
 {
