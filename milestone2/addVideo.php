@@ -8,11 +8,11 @@ session_start();
 	</head>
 	
 	<body>
-                 <?
-            if ( isset($_SESSION["username"]))
+            <?php
+            if ( isset($_SESSION['username']))
             {
-                $username = $_SESSION["username"];
-                echo "<div>";
+                $username = $_SESSION['username'];
+                echo ('<div>');
                 echo ("Hello, $username!<br>");
                 echo "</div>";
             }
@@ -22,7 +22,12 @@ session_start();
 	<li><a href='./index.php'>Start Up</a></li>
 
 	<li><a href='./addVideo.php'>Add Video</a></li> 
-	<li><a href='./editProfile.php'>Edit Profile</a></li>
+        <?php
+            if ( isset($_SESSION['username']))
+            {
+	            print "<li><a href='./editProfile.php'>Edit Profile</a></li>";
+            }
+    ?>
 	<li><a href='./logout.php'>Logout</a></li>
 </ul>
 	
@@ -102,6 +107,7 @@ session_start();
 				// {
 					// print ("<a href='./logout.php'>Logout</a>");
 				// }
+                if($_session)
 				if($_SESSION['admin'])
 				{
 					print ("<h2><a href='./editVideo.php'>Edit a Video!</a></h2>");

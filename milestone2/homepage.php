@@ -1,5 +1,11 @@
 <?php
-session_start();
+    session_start();
+    if(!isset($_SESSION['username']))
+    {
+		ob_end_clean();
+		header('Location: index.php');
+		exit();
+    }
 ?>
 <html>
 <head>

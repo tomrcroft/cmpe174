@@ -1,7 +1,7 @@
 <?php
 //ini_set("error_log", "http://www.sjsu-cs.org/classes/cs174/sec1/croft/project/php-error.log");
 	session_start();
-        if(!isset($_SESSION['username']))
+        if(!isset($_SESSION['username']) && !$_SESSION['admin'])
         {
 		    ob_end_clean();
 		    header('Location: index.php');
