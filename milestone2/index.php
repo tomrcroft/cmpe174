@@ -194,9 +194,66 @@ PART C3
 		<h1>Start Up Page!</h1>
 
     			<?php
-
+           
+                 
                 echo("<form id='search' action='search.php' method='POST'>");
-                echo("<input type='submit' value='Search'><input type='text' name='search'>");
+                echo ("<ul id='search_bar'>");
+                echo ("<li>Video Length <select name='length'>
+                    <option value='0'>0-5min</option>
+                    <option value='1'>5-10min</option>
+                    <option value='2'>10-30min</option>
+                    <option value='3'>30-60min</option>
+                    <option value='4'>60min+</option>
+                    </select>
+                </li>");
+                echo ("<li>Highest Resolution <select name='res'>
+                    <option value='144'>144p</option>
+					<option value='240'>240p</option>
+					<option value='360'>360p</option>
+					<option value='480'>480p</option>
+					<option value='720'>720p</option>
+					<option value='1080'>1080p</option>
+                    </select>
+                </li>");
+                echo ("<li>Video Language <select name='language'>
+                    <option value='English'>English</option>
+                    <option value='Non-English'>Non-English</option>
+                    </select>
+                </li>");
+                echo ("<li>View Count <select name='count'>
+                    <option value='0'>0-100,000</option>
+                    <option value='1'>100,000-200,000</option>
+                    <option value='2'>200,000-300,000</option>
+                    <option value='3'>300,000-400,000</option>
+                    <option value='4'>400,000-500,000</option>
+                    <option value='5'>500,000+</option>
+                    </select>
+                </li>");
+                echo ("<li>Video Type(Multiple) <select multiple name='type[]'>
+                    <option value='Tutorial'>Tutorial</option>
+                    <option value='Entertainment'>Entertainment</option>
+                    <option value='Application'>Application</option>
+                    <option value='Weapon'>Weapon</option>
+                    <option value='Group Demo'>Group Demo</option>
+                    <option value='Others'>Others</option>
+                    </select>
+                </li>");
+                echo ("<li>Category <select name='category'>
+                    <option value='Yang Taichi'>Yang Taichi</option>
+                    <option value='Chen Taichi'>Chen Taichi</option>
+                    <option value='Sun Taichi'>Sun Taichi</option>
+                    <option value='Wu Taichi'>Wu Taichi</option>
+                    <option value='QiGong'>QiGong</option>
+                    <option value='Shaolin'>Shaolin</option>
+                    <option value='Tae kwon do'>Tae kwon do</option>
+                    <option value='Wing Chun'>Wing Chun</option>
+                    <option value='Aikido'>Aikido</option>
+                    <option value='Judo'>Judo</option>
+                    <option value='KungFu Movie'>KungFu Movie</option>
+                    </select>
+                </li>");
+                echo ("</ul>");
+                echo ("<br>Tags <input type='text' name='search'><br><input type='submit' value='Search'>");
                 echo("</form>");
 
             ?>

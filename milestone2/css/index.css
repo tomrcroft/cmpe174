@@ -22,10 +22,12 @@ div {
 	text-align: center;
 }
 
+
+
+
 table, td, th {
     border: 1px solid red;
 }
-
 th {
     background-color: black;
     color: red;
@@ -34,11 +36,22 @@ th {
 td{
 	background-color: white;
 }
+
 #navlist li
 {
 display: inline;
 list-style-type: none;
 padding-right: 20px;
+}
+
+#search_bar li {
+    display: inline;
+list-style-type: none;
+padding: 10px;
+color: white;
+}
+#search {
+    color: white;
 }
 .slideshow-overlay {
  			position: absolute;

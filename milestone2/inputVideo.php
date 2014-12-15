@@ -28,26 +28,28 @@
 
 include 'DBconstants.php';
 
-$title = $_POST["title"];
+$title = htmlentities($_POST["title"], ENT_QUOTES);
 $link = $_POST["link"];
 $length = $_POST["length"];
 $res = $_POST["res"];
-$description = $_POST["description"];
+$description = htmlentities($_POST["description"], ENT_QUOTES);
 $language = $_POST["language"];
 $views = $_POST["views"];
 $type = implode(",",$_POST["type"]);
 $image = $_POST["image"];
-$tags = $_POST["tags"];
+$tags = htmlentities($_POST["tags"], ENT_QUOTES);
 $category = $_POST["category"];
 
 
 $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
 
 if (mysqli_connect_errno()) {
-		die("Failed to connect to MySQL: " . mysqli_connect_error());}
+		die("Failed to connect to MySQL: " . mysqli_connect_error());
+        }
+$query = "insert into fun_video_all (title, videolink, videolength, highestresolution, description, language, viewcount, videotype, iconimage, tag, category)
+					VALUES('$title', '$link', $length, '$res', '$description', '$language', $views, '$type', '$image', '$tags', '$category');";
 
-$result = mysqli_query($con, "insert into fun_video_all (title, videolink, videolength, highestresolution, description, language, viewcount, videotype, iconimage, tag, category)
-					VALUES('$title', '$link', $length, '$res', '$description', '$language', $views, '$type', '$image', '$tags', '$category);");
+$result = mysqli_query($con, $query);
 		
 if($result == true)
 {
@@ -56,7 +58,22 @@ if($result == true)
 }
 else 
 	echo $result;
+$result = mysqli_query($con, "insert into fun_video_all (title, videolink, videolength, highestresolution, description, language, viewcount, videotype, iconimage, tag, category)
 
+					VALUES('$title', '$link', $length, '$res', '$description', '$language', $views, '$type', '$image', '$tags', '$category');");
+
+		
+
+if($result == true)
+
+{
+	print("<p>Video added successfully!</p>");
+
+	print("<h1><a href='./viewVideos.php'>View Videos!</a><h1>");
+
+	print("<h1><a href='./index.php'>Add More Videos!</a><h1>");
+
+}
 
 ?>
 </body>

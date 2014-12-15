@@ -91,11 +91,68 @@
         ?>
 </div>
     			<?php
-                /*
+           
+                 
                 echo("<form id='search' action='search.php' method='POST'>");
-                echo("<input type='submit' value='Search'><input type='text' name='search'>");
+                echo ("<ul id='search_bar'>");
+                echo ("<li>Video Length <select name='length'>
+                    <option value='0'>0-5min</option>
+                    <option value='1'>5-10min</option>
+                    <option value='2'>10-30min</option>
+                    <option value='3'>30-60min</option>
+                    <option value='4'>60min+</option>
+                    </select>
+                </li>");
+                echo ("<li>Highest Resolution <select name='res'>
+                    <option value='144'>144p</option>
+					<option value='240'>240p</option>
+					<option value='360'>360p</option>
+					<option value='480'>480p</option>
+					<option value='720'>720p</option>
+					<option value='1080'>1080p</option>
+                    </select>
+                </li>");
+                echo ("<li>Video Language <select name='language'>
+                    <option value='English'>English</option>
+                    <option value='Non-English'>Non-English</option>
+                    </select>
+                </li>");
+                echo ("<li>View Count <select name='count'>
+                    <option value='0'>0-100,000</option>
+                    <option value='1'>100,000-200,000</option>
+                    <option value='2'>200,000-300,000</option>
+                    <option value='3'>300,000-400,000</option>
+                    <option value='4'>400,000-500,000</option>
+                    <option value='5'>500,000+</option>
+                    </select>
+                </li>");
+                echo ("<li>Video Type(Multiple) <select multiple name='type[]'>
+                    <option value='Tutorial'>Tutorial</option>
+                    <option value='Entertainment'>Entertainment</option>
+                    <option value='Application'>Application</option>
+                    <option value='Weapon'>Weapon</option>
+                    <option value='Group Demo'>Group Demo</option>
+                    <option value='Others'>Others</option>
+                    </select>
+                </li>");
+                echo ("<li>Category <select name='category'>
+                    <option value='Yang Taichi'>Yang Taichi</option>
+                    <option value='Chen Taichi'>Chen Taichi</option>
+                    <option value='Sun Taichi'>Sun Taichi</option>
+                    <option value='Wu Taichi'>Wu Taichi</option>
+                    <option value='QiGong'>QiGong</option>
+                    <option value='Shaolin'>Shaolin</option>
+                    <option value='Tae kwon do'>Tae kwon do</option>
+                    <option value='Wing Chun'>Wing Chun</option>
+                    <option value='Aikido'>Aikido</option>
+                    <option value='Judo'>Judo</option>
+                    <option value='KungFu Movie'>KungFu Movie</option>
+                    </select>
+                </li>");
+                echo ("</ul>");
+                echo ("<br>Tags <input type='text' name='search'><br><input type='submit' value='Search'>");
                 echo("</form>");
-                */
+
             ?>
     <br><br>
     <form id="selectForm" action="index.php" method="post">
@@ -204,7 +261,64 @@
                 global $search;
                
                 $con = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASENAME);
-	            $query = "select * from fun_video_all where tag like '%$search%';";
+                
+
+	            $query = "select * from fun_video_all where";
+                if (isset($search) and strlen($search) != 0 )
+                {
+                    print "what is : " . strlen($search);
+                    $query = $query . " tag like '%$search%'";
+                }
+                else
+                {
+                    $query = $query . " id > 0";
+                }
+                if(isset($_POST["length"]))
+                {
+                    $index = $_POST["length"];
+                    $length = array( " AND videolength < 5", 
+                    " AND videolength >= 5 AND videolength < 10", 
+                    " AND videolength >= 10 AND videolength < 30", 
+                    " AND videolength >= 30 AND videolength < 60",
+                    " AND videolength >= 60");
+                    $query = $query . $length[$index];
+                }
+                if(isset($_POST["res"]))
+                {
+                    $result = $_POST["res"];
+                    $query = $query . " AND highestresolution = '$result'";
+                }
+                if(isset($_POST["language"]))
+                {
+                    $result = $_POST["language"];
+                    $query = $query . " AND language = '$result'";
+                }
+                if(isset($_POST["count"]))
+                {
+                    $index = $_POST["count"];
+                    $count = array( " AND viewcount < 100000", 
+                    " AND viewcount >= 100000 AND viewcount < 200000", 
+                    " AND viewcount >= 200000 AND viewcount < 300000", 
+                    " AND viewcount >= 300000 AND viewcount < 400000",  
+                    " AND viewcount >= 400000 AND viewcount < 500000", 
+                    " AND viewcount >= 500000");
+                    $query = $query . $count[$index];
+                }
+                if(isset($_POST["type"]))
+                {
+                    $query = $query . " AND ( ";
+                    foreach($_POST["type"] as $type)
+                    {
+                        $query = $query . " videotype LIKE '%$type%' OR";
+                    }
+                    $query = substr($query, 0, -3);
+                    $query = $query . ")";
+                }
+                if(isset($_POST["category"]))
+                {
+                    $cat = $_POST["category"];
+                    $query = $query . " AND category = '$cat'";
+                }
                 #echo($query);
 	            if ($con->connect_error) {
                     die("Connection failed: " . $con->connect_error);
