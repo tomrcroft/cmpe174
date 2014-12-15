@@ -162,7 +162,7 @@ PART C3
      <?php
         if(!isset($_SESSION['username']))
         {
-            echo $_SESSION["username"];
+            //echo $_SESSION["username"];
 			echo "<div>
             <form name='loginForm' action='loginFile.php' method='post' >
             <p>Login here!<br></p>
@@ -175,9 +175,9 @@ PART C3
             <input class='b' type='submit' name='submit' value='Login'>
             <br>
 	        <a href='registration.php' ><span style ='color:blue;'> Click here to register</span></a>
-            <br><input type='checkbox' name='cookiecheck' value='Yes' /> Remember Username and Password? <br
+            <br><input type='checkbox' name='cookiecheck' value='Yes' /> Remember Username and Password? <br>
             </form><br><br>";
-			echo $_SESSION["username"] . "</div>";
+			echo "</div>";
         }
         else
         {
@@ -193,11 +193,12 @@ PART C3
 			echo "<li><a href='./editProfile.php'>Edit Profile</a></li>";
 			echo "<li><a href='./logout.php'>Logout</a></li>";
 			echo "</ul>";
+			echo "</div>";
         }
 
            
         ?>
-</div>
+
     			<?php
 
                 echo("<form id='search' action='search.php' method='POST'>");
